@@ -1,187 +1,422 @@
 ---
-title: "分析手法"
+execute:
+  echo: true
+  warning: false
+  message: false
 ---
 
-:::{.callout-tip title="書き方ガイド：分析手法"}
-**何を書くか：** 使用する分析手法の理論的背景と、なぜその手法を選んだかの根拠を述べる章です。
+# 分析手法
 
-**書き方のコツ：**
+## 分析方針
 
-- **手法の選定理由** を比較表で示すと説得力が増します
-- **数学的な定義** は LaTeX 数式で正確に記述します
-- パイプライン全体を図解すると読者の理解が深まります
-- 評価指標は定義を明示し、なぜその指標を使うのかを説明します
+分析は、プレイ回数と課金額を組み合わせた二値指標から始め、属性・ジャンルとの関係を調べた後、両指標の組み合わせを4状態に分けて内訳を検討する流れで進める。(1)指標の定義、(2)主要変数の分布確認、(3)ジャンル別集計、(4)属性を調整したロジスティック回帰を行い、続いて(5)4状態のジャンル比較、(6)年齢差の補助分析、(7)閾値の感度分析を行う。
 
-**Quartoの機能：**
+研究題目に含まれる「過疎」「サービス終了リスク」の問題意識に対し、このCSVにはゲームごとの利用者数の推移、実際の離脱記録、サービス終了実績は含まれない。したがって、統計分析では「低プレイ・低課金の代理指標」または「低プレイ・低課金状態」と表記し、ゲームの過疎やサービス終了を直接測定したものとは解釈しない。また `SessionCount` の観測期間はCSVの項目から確認できないため、「週あたりのプレイ回数」とは呼ばない。
 
-- LaTeX 数式は `$$` で囲みます。`{#eq-label}` で式番号を付与し、`@eq-label` で参照します
-- Mermaid 記法でパイプライン図やフロー図を描けます
-- `#| label: tbl-xxx` と `#| tbl-cap:` で表番号とキャプションを自動付与します
-:::
+## CSV読込
 
+分析に用いる列を読み込み、文字列の空欄を欠損値に統一して、数値列を数値型に変換する。分析ごとに必要な変数が異なるため、対象者数は各分析で明示する。
 
-## 手法の選定
-
-本研究では、以下の2手法を比較する。ベースラインとして線形回帰を用い、非線形な関係を捉える手法として回帰木（rpart）[@James2023] を採用する。
-
-| 手法 | 特徴 | 利点 | 欠点 |
-|------|------|------|------|
-| 線形回帰 | 線形モデル | 解釈が容易、計算が高速 | 非線形関係を捉えにくい |
-| 回帰木（rpart） | 決定木ベースの再帰分割 | 非線形対応、解釈が視覚的 | 過学習リスク、不安定性 |
-
-: 手法の比較 {#tbl-method-comparison}
-
-
-## 線形回帰（ベースライン）
-
-線形回帰モデルは、目的変数 $y$ を説明変数 $\mathbf{x} = (x_1, x_2, \ldots, x_p)$ の線形結合で表現する。
-
-$$
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon
-$$ {#eq-linear}
-
-ここで $\beta_0$ は切片、$\beta_1, \ldots, \beta_p$ は回帰係数、$\varepsilon$ は誤差項である [@James2023]。
-
-
-## 回帰木（rpart）
-
-回帰木は、説明変数の空間を再帰的に分割し、各領域ごとに目的変数の平均値を予測するノンパラメトリック手法である [@James2023]。R の `rpart` パッケージはR に標準搭載されており、追加インストール不要で利用できる。
-
-### 分割の基準
-
-各ノードにおいて、残差二乗和（RSS）を最小化する分割点を探索する。
-
-$$
-\text{RSS} = \sum_{x_i \in R_1} (y_i - \hat{y}_{R_1})^2 + \sum_{x_i \in R_2} (y_i - \hat{y}_{R_2})^2
-$$ {#eq-rss-split}
-
-ここで $R_1, R_2$ は分割後の2つの領域、$\hat{y}_{R_k}$ は各領域内の目的変数の平均値である。
-
-### 決定木の構造
-
-```{mermaid}
-%%| label: fig-decision-tree
-%%| fig-cap: "決定木による分岐のイメージ"
-flowchart TD
-    A["気温 ≥ 20°C ?"] -->|Yes| B["時間帯 ∈ 通勤時間 ?"]
-    A -->|No| C["降雨あり ?"]
-    B -->|Yes| D["予測: 150台"]
-    B -->|No| E["予測: 90台"]
-    C -->|Yes| F["予測: 25台"]
-    C -->|No| G["予測: 55台"]
-```
-
-### 剪定（Pruning）
-
-回帰木は深くなるほど訓練データに過学習する。これを防ぐため、コスト複雑度剪定（cost-complexity pruning）を行う。
-
-$$
-\text{Cost} = \text{RSS} + \alpha \cdot |T|
-$$ {#eq-cost-complexity}
-
-ここで $|T|$ は木の終端ノード数、$\alpha$ は複雑度パラメータ（`cp`）である。$\alpha$ が大きいほど単純な木が選ばれる。
-
-
-## 説明変数の設計
-
-| 変数名 | 型 | 説明 | 変換 |
-|--------|------|------|------|
-| `hour` | integer | 時間帯 | そのまま使用 |
-| `temperature` | numeric | 気温 | そのまま使用 |
-| `humidity` | numeric | 湿度 | そのまま使用 |
-| `wind_speed` | numeric | 風速 | そのまま使用 |
-| `is_rain` | integer | 降雨フラグ | factor 変換 |
-| `is_weekend` | logical | 休日フラグ | factor 変換 |
-| `month` | integer | 月 | factor 変換 |
-
-: 説明変数一覧 {#tbl-features}
-
-
-## 分析パイプライン
-
-```{mermaid}
-%%| label: fig-pipeline
-%%| fig-cap: "分析パイプライン"
-flowchart LR
-    A[データ読込] --> B[前処理<br>factor変換]
-    B --> C[訓練/テスト分割<br>80:20]
-    C --> D[モデル学習]
-    D --> E1[線形回帰<br>lm]
-    D --> E2[回帰木<br>rpart]
-    E1 --> F[精度評価<br>MAE/RMSE/R²]
-    E2 --> F
-    F --> G[変数重要度<br>分析]
-```
-
-
-## 精度評価指標
-
-モデルの予測精度を評価するため、以下の3指標を使用する。
-
-### 平均絶対誤差（MAE）
-
-$$
-\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
-$$ {#eq-mae}
-
-### 二乗平均平方根誤差（RMSE）
-
-$$
-\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
-$$ {#eq-rmse}
-
-### 決定係数（R²）
-
-$$
-R^2 = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
-$$ {#eq-r2}
-
-ここで $y_i$ は実測値、$\hat{y}_i$ は予測値、$\bar{y}$ は実測値の平均、$n$ はサンプル数である。
-
-@eq-mae は外れ値に頑健な指標、@eq-rmse は大きな誤差をより重く評価する指標、@eq-r2 はモデルの説明力を0〜1で表す指標である。
-
-
-## 追加パッケージの利用（発展）
-
-本テンプレートはR の基本パッケージのみで動作するが、研究の目的に応じてより高度なパッケージを導入できる。
-
-::: {.callout-important title="パッケージの追加手順"}
-1. **R コンソール**で `install.packages("パッケージ名")` を実行（初回のみ）
-2. `.qmd` ファイルのコードブロック内で `library(パッケージ名)` を記述
-3. `quarto render` で正常にビルドできることを確認
-:::
-
-### 代表的な追加パッケージ
-
-| パッケージ | 用途 | インストール |
-|:---|:---|:---|
-| `tidyverse` | データ操作・可視化の統合環境 | `install.packages("tidyverse")` |
-| `randomForest` | ランダムフォレスト | `install.packages("randomForest")` |
-| `lightgbm` | 勾配ブースティング（LightGBM） | `install.packages("lightgbm")` |
-| `plotly` | インタラクティブなグラフ | `install.packages("plotly")` |
-
-### 使用例：LightGBM で回帰木を置き換える場合
-
-```r
-# 1. インストール（R コンソールで一度だけ実行）
-install.packages("lightgbm")
-
-# 2. .qmd ファイル内で読み込んで使用
-library(lightgbm)
-
-dtrain <- lgb.Dataset(
-  data  = as.matrix(train_data[, -which(names(train_data) == "count")]),
-  label = train_data$count
+```{r}
+csv_path <- "C:/Users/js201/OneDrive/ドキュメント/2026春/ゼミ2/データセット/mobile_game_inapp_purchases.csv"
+raw_data <- read.csv(
+  csv_path,
+  check.names = FALSE,
+  stringsAsFactors = FALSE,
+  na.strings = c("", "NA")
 )
 
-params <- list(objective = "regression", metric = "rmse",
-               num_leaves = 31, learning_rate = 0.1)
+required <- c("Age", "Country", "Device", "GameGenre",
+              "SessionCount", "InAppPurchaseAmount")
+missing_columns <- setdiff(required, names(raw_data))
+if (length(missing_columns) > 0) {
+  stop("CSVに必要な列がありません: ", paste(missing_columns, collapse = ", "))
+}
 
-lgbm_fit <- lgb.train(params, dtrain, nrounds = 500)
+clean_text <- function(x) {
+  x <- trimws(as.character(x))
+  x[x == ""] <- NA_character_
+  x
+}
+
+d <- raw_data
+categorical_columns <- c("Country", "Device", "GameGenre")
+for (v in categorical_columns) d[[v]] <- clean_text(d[[v]])
+numeric_columns <- c("Age", "SessionCount", "InAppPurchaseAmount")
+for (v in numeric_columns) {
+  d[[v]] <- suppressWarnings(as.numeric(d[[v]]))
+}
+
+cat("CSV全体:", nrow(d), "件\n")
+cat("分析に使う列:\n")
+str(d[required])
 ```
 
-::: {.callout-warning title="注意"}
-- 追加パッケージを使う場合、`quarto render` 時にそのパッケージがインストール済みである必要がある
-- エラーが出たら、まず `install.packages("パッケージ名")` を実行してから再度 `quarto render` する
-- GitHub Pages にデプロイする際、**ビルドは自分の PC 上で行われる**ため、自分の PC にパッケージがあれば問題ない
-:::
+## 二値指標の分析対象と定義
+
+二値指標による分析では、`Age`、`SessionCount`、`InAppPurchaseAmount` がそろうレコードを用いる。\
+この対象内で両行動指標の第1四分位数を求め、各指標が境界以下なら「低い」とし、両方に該当する場合を1、該当しない場合を0とする。\
+連続値・離散値の同値により、「境界以下」の実際の割合は必ずしも25%にならない。\
+4状態の分析では年齢を必須にせず、プレイ回数と課金額がそろう全対象を用いるため、標本・境界が異なる。
+
+```{r}
+base_data <- d[complete.cases(d[c("SessionCount", "InAppPurchaseAmount")]), ]
+prior_data <- d[complete.cases(d[c("Age", "SessionCount", "InAppPurchaseAmount")]), ]
+play_cutoff <- unname(quantile(prior_data$SessionCount, 0.25, type = 7))
+spend_cutoff <- unname(quantile(prior_data$InAppPurchaseAmount, 0.25, type = 7))
+
+prior_data$low_play <- prior_data$SessionCount <= play_cutoff
+prior_data$low_spend <- prior_data$InAppPurchaseAmount <= spend_cutoff
+prior_data$low_both <- as.integer(prior_data$low_play & prior_data$low_spend)
+
+data.frame(
+  分析対象 = nrow(prior_data),
+  プレイ回数の第1四分位境界 = play_cutoff,
+  課金額の第1四分位境界 = spend_cutoff,
+  該当者数 = sum(prior_data$low_both == 1),
+  該当割合_percent = mean(prior_data$low_both == 1) * 100
+)
+```
+
+プレイ回数が8回以下、かつ課金額が約6.01ドル以下の人を「両方低い」と判定する。
+
+## 主要変数の分布確認
+
+二値指標から4状態へ進む分析の土台として、プレイ回数と課金額の要約統計量および分布を示す。課金額は分布の裾が長い可能性があるため、平均だけでなく中央値と四分位数も確認する。
+
+```{r}
+make_summary <- function(x, variable_name) {
+  result <- data.frame(
+    変数 = variable_name,
+    有効件数 = length(x),
+    平均 = mean(x),
+    標準偏差 = sd(x),
+    第1四分位数 = unname(quantile(x, 0.25)),
+    中央値 = median(x),
+    第3四分位数 = unname(quantile(x, 0.75)),
+    最小値 = min(x),
+    最大値 = max(x)
+  )
+
+  result[, -1] <- lapply(result[, -1], round, 2)
+  result
+}
+
+# プレイ回数の表
+session_table <- make_summary(
+  prior_data$SessionCount,
+  "SessionCount"
+)
+session_table
+```
+
+```{r}
+hist(
+  base_data$SessionCount, 
+  breaks = "FD", 
+  col = "#4E79A7", 
+  border = "white",
+  main = "プレイ回数の分布", 
+  xlab = "SessionCount（回）", 
+  ylab = "人数")
+```
+
+プレイ回数は、中央値が10回で、第1四分位数が8回、第3四分位数が12回。中央の半数のユーザーはおおむね8∼12回の範囲にいる。
+
+```{r}
+# 課金額の表
+spending_table <- make_summary(
+  prior_data$InAppPurchaseAmount,
+  "InAppPurchaseAmount"
+)
+spending_table
+```
+
+```{r}
+d <- read.csv(
+  "C:/Users/js201/OneDrive/ドキュメント/2026春/ゼミ2/データセット/mobile_game_inapp_purchases.csv",
+  na.strings = c("", "NA")
+)
+
+x <- as.numeric(d$InAppPurchaseAmount)
+x <- x[is.finite(x)]
+
+cat("有効件数:", length(x), "\n")
+cat("範囲:", range(x), "\n")
+
+hist(
+  log1p(x),
+  breaks = 30,
+  col = "#F28E2B",
+  border = "white",
+  main = "課金額の分布（対数変換）",
+  xlab = "log(1 + 課金額［USD］)",
+  ylab = "人数"
+)
+```
+
+課金額は、中央値が11.99ドルなのに対し、平均が103.76ドル。最大値も4,964.45ドルと大きく、少数の高額課金が平均を押し上げている、偏りの大きい分布だと考えられる。そのため、課金額は平均だけではなく中央値や四分位数も併せてみる必要がある。 ＊グラフは対数変換されている。
+
+## ジャンル別の単純集計
+
+二値指標（両方低い／それ以外）を用い、ゲームジャンルごとの人数と該当割合を算出する。割合だけでは少数ジャンルが目立つ場合があるため、分母となる人数も併記する。これは記述的な比較であり、ジャンルの因果効果を推定するものではない。
+
+```{r}
+genre_data <- prior_data[!is.na(prior_data$GameGenre), ]
+genre_split <- split(genre_data, genre_data$GameGenre)
+genre_summary <- do.call(rbind, lapply(names(genre_split), function(g) {
+  x <- genre_split[[g]]
+  n <- nrow(x)
+  k <- sum(x$low_both == 1)
+  ci <- if (n > 0) binom.test(k, n)$conf.int else c(NA_real_, NA_real_)
+  data.frame(
+    GameGenre = g,
+    人数 = n,
+    該当者数 = k,
+    該当割合_percent = 100 * k / n,
+    CI95下限_percent = 100 * ci[1],
+    CI95上限_percent = 100 * ci[2]
+  )
+}))
+genre_summary <- genre_summary[order(-genre_summary$該当割合_percent), ]
+genre_summary[, -1] <- lapply(genre_summary[, -1], round, 2)
+rownames(genre_summary) <- NULL
+genre_summary
+```
+
+```{r}
+plot_data <- genre_summary[order(genre_summary$該当割合_percent), ]
+par(mar = c(5, 10, 4, 2))
+barplot(plot_data$該当割合_percent, names.arg = plot_data$GameGenre,
+        horiz = TRUE, las = 1, col = "#4E79A7",
+        xlab = "低プレイ・低課金ユーザーの割合（%）",
+        main = "ジャンル別の低プレイ・低課金割合")
+par(mar = c(5, 4, 4, 2))
+```
+
+割合はSandboxが9.80%で最も高く、Sportsが9.66%。Cardは4.23%で最も低くなっている。
+
+## 属性を調整したロジスティック回帰
+
+目的変数はプレイ回数と課金額から作る二値代理指標である。\
+年齢・国・端末・ジャンルを説明変数として、各属性と該当状態との関連を同時に推定する。\
+目的変数作成に使う行と、説明変数の欠損を除いた回帰標本は異なるため、回帰に用いた標本数と該当者数を報告する。\
+カテゴリ変数の係数はそれぞれ基準カテゴリとの比較であり、変数全体の検定結果も確認する。
+
+```{r}
+model_columns <- c("low_both", "Age", "Country", "Device", "GameGenre")
+model_data <- prior_data[
+  complete.cases(prior_data[model_columns]) &
+    !is.na(prior_data$Country) & !is.na(prior_data$Device) &
+    !is.na(prior_data$GameGenre),
+]
+
+model_data$Country <- droplevels(factor(model_data$Country))
+model_data$Device <- droplevels(factor(model_data$Device))
+model_data$GameGenre <- droplevels(factor(model_data$GameGenre))
+
+cat("回帰標本:", nrow(model_data), "件\n")
+cat("該当者:", sum(model_data$low_both == 1), "人\n")
+cat("非該当者:", sum(model_data$low_both == 0), "人\n")
+
+logit_model <- glm(
+  low_both ~ Age + Country + Device + GameGenre,
+  data = model_data,
+  family = binomial(link = "logit")
+)
+summary(logit_model)
+```
+
+係数はオッズ比に変換し、95% Wald信頼区間とp値を示す。
+
+```{r}
+coef_mat <- coef(summary(logit_model))
+or_table <- data.frame(
+  変数 = rownames(coef_mat),
+  係数 = coef_mat[, "Estimate"],
+  標準誤差 = coef_mat[, "Std. Error"],
+  オッズ比 = exp(coef_mat[, "Estimate"]),
+  CI95下限 = exp(coef_mat[, "Estimate"] - 1.96 * coef_mat[, "Std. Error"]),
+  CI95上限 = exp(coef_mat[, "Estimate"] + 1.96 * coef_mat[, "Std. Error"]),
+  p値 = coef_mat[, "Pr(>|z|)"],
+  row.names = NULL
+)
+or_table[, -1] <- lapply(or_table[, -1], round, 4)
+or_table
+```
+
+```{r}
+# 各カテゴリ変数を全体として評価する尤度比検定
+drop1(logit_model, test = "Chisq")
+
+data.frame(
+  回帰標本数 = nobs(logit_model),
+  該当者数 = sum(model_data$low_both == 1),
+  非該当者数 = sum(model_data$low_both == 0),
+  AIC = AIC(logit_model),
+  null_deviance = logit_model$null.deviance,
+  residual_deviance = logit_model$deviance
+)
+```
+
+| 項目 | 出力の場所 | 数値 | 読み取り方 |
+|:-----------------|:-----------------|-----------------:|:-----------------|
+| 回帰分析の対象人数 | 回帰標本数 | 2,667人 | 年齢・国・端末・ジャンルなど、モデルに使う情報がそろった人数 |
+| 回帰分析での該当者数 | 該当者数 | 204人 | 回帰標本のうち、低プレイ・低課金の両方に該当した人数 |
+| 年齢のオッズ比 | `or_table` のAge行「オッズ比」 | 1.0009 | 年齢が1歳上がったとき、該当するオッズがわずかに高くなる推定。ただし、ほぼ1に近い |
+| 年齢の95%信頼区間 | `or_table` のAge行「CI95下限～CI95上限」 | 0.9889～1.0131 | 1を含んでいる |
+| 年齢との個別の関連 | `summary(logit_model)` のAge行 `Pr(>\|z\|)` | p = 0.879 | 5%水準を上回り、年齢との個別の関連は確認できない |
+| 年齢との全体的な関連 | `drop1()` のAge行 `Pr(>Chi)` | p = 0.8794 | 年齢をモデルから除いても、適合度に明確な変化は確認できない |
+| 国全体との関連 | `drop1()` のCountry行 `Pr(>Chi)` | p = 0.3221 | 国全体としての明確な関連は確認できない |
+| 端末全体との関連 | `drop1()` のDevice行 `Pr(>Chi)` | p = 0.9009 | 端末全体としての明確な関連は確認できない |
+| ジャンル全体との関連 | `drop1()` のGameGenre行 `Pr(>Chi)` | p = 0.5337 | ジャンル全体としての明確な関連は確認できない |
+
+回帰分析の対象は2,667人で、そのうち低プレイ・低課金の両方に該当した人は204人だった。 年齢のオッズ比は1.0009、95%信頼区間は0.9889∼1.0131で、信頼区間は1を含んでいる。 年齢のp値も個別の係数検定で0.879、変数全体の検定で0.8794となり、年齢との明確な関連は確認できなかった。
+
+国・端末・ジャンルについても、変数全体の検定結果はそれぞれp = 0.3221、p = 0.9009、p = 0.5337で、いずれも5%水準を上回っている。 したがって、この分析では、年齢・国・端末・ジャンルと低プレイ・低課金の代理指標との明確な関連は確認できなかった。
+
+## 4状態の定義
+
+二値指標で捉えた状態をさらに詳しく見るため、年齢を必須とせず、プレイ回数と課金額がそろう対象を用いて、それぞれの第1四分位数を計算する。 プレイ回数と課金額の低さを別々に扱い、二つの二値指標の組み合わせから4状態を作る。同じ境界値を含むユーザーは「低い」側に分類する。
+
+| 状態                   | プレイ回数 | 課金額   |
+|:-----------------------|:-----------|:---------|
+| 低プレイのみ           | 低い       | 低くない |
+| 低課金のみ             | 低くない   | 低い     |
+| 低プレイ・低課金の両方 | 低い       | 低い     |
+| どちらも低くない       | 低くない   | 低くない |
+
+```{r}
+play_cutoff_4state <- unname(quantile(base_data$SessionCount, 0.25, type = 7))
+spend_cutoff_4state <- unname(quantile(base_data$InAppPurchaseAmount, 0.25, type = 7))
+base_data$low_play <- base_data$SessionCount <= play_cutoff_4state
+base_data$low_spend <- base_data$InAppPurchaseAmount <= spend_cutoff_4state
+base_data$state <- with(base_data, ifelse(
+  low_play & low_spend, "低プレイ・低課金の両方",
+  ifelse(low_play, "低プレイのみ",
+         ifelse(low_spend, "低課金のみ", "どちらも低くない"))
+))
+base_data$state <- factor(
+  base_data$state,
+  levels = c("低プレイのみ", "低課金のみ", "低プレイ・低課金の両方", "どちらも低くない")
+)
+state_counts <- table(base_data$state)
+data.frame(状態 = names(state_counts), 人数 = as.integer(state_counts),
+           割合_percent = round(100 * prop.table(state_counts), 2))
+```
+
+最も多いのは「どちらも低くない」人で、全体の51.00%だった。 一方、低プレイのみは24.00%、低課金のみは17.49%だった。 この分類から、プレイ回数の少なさと課金額の少なさは、同じ状況としてまとめずに分けてみる必要があることが分かる。
+
+\## ジャンルとの関連
+
+ジャンルと4状態のクロス集計を行い、ジャンル内の構成割合を示す。 Pearsonのカイ二乗統計量とモンテカルロ法によるp値を併記し、カテゴリの期待度数が小さい場合にも漸近近似だけに依存しないようにする。 \
+検定は分布全体の関連を評価するもので、特定ジャンルの因果効果を示すものではない。
+
+```{r}
+genre_state_data <- base_data[!is.na(base_data$GameGenre), ]
+genre_state <- table(genre_state_data$GameGenre, genre_state_data$state)
+genre_state
+round(100 * prop.table(genre_state, margin = 1), 1)
+set.seed(20261013)
+chisq.test(genre_state, simulate.p.value = TRUE, B = 10000)
+
+```
+
+ジャンルと4つのユーザー状態の関連を検定した結果、統計的に明確な関連は確認されなかった（χ² = 42.478、モンテカルロ法による p = 0.4556）。p値は一般的な5%水準を上回っている。
+
+割合を記述的に見ると、「低プレイ・低課金の両方」の割合はSportsで10.0%、Sandboxで9.7%と高く、Cardで4.1%、MOBAとPuzzleで4.6%と低くなっている。\
+ただし、全体の検定では有意な関連が確認されていないため、これらのジャンル間の差を統計的に明確な差として結論づけることはできない。
+
+シミュレーションによるカイ二乗検定の結果、ジャンルとユーザー状態の間に統計的に有意な関連は確認されなかった（χ² = 42.478、p = 0.4556）。\
+「低プレイ・低課金の両方」に該当する割合はジャンルごとに異なって見られたが、全体の検定結果からは、ジャンルによる明確な構成差があるとはいえない。
+
+## 年齢差の補助分析
+
+年齢が利用できる対象者について4状態間の年齢分布を比較する。年齢の正規性を前提にしないKruskal–Wallis検定を補助的に用い、各群の人数・中央値も併記する。探索的分析として解釈する。
+
+```{r}
+age_data <- base_data[!is.na(base_data$Age), ]
+age_summary <- do.call(rbind, lapply(split(age_data$Age, age_data$state), function(x) {
+  data.frame(人数 = length(x), 中央値 = median(x), 第1四分位数 = quantile(x, .25),
+             第3四分位数 = quantile(x, .75))
+}))
+age_summary$状態 <- rownames(age_summary)
+rownames(age_summary) <- NULL
+age_summary[, c("状態", "人数", "中央値", "第1四分位数", "第3四分位数")]
+kruskal.test(Age ~ state, data = age_data)
+```
+
+年齢が欠損していない2,835人を、4つの状態に分けて比較した結果。
+
+状態間に統計的に有意な差は確認されなかった（χ²(3) = 1.9374、p = 0.5855）。\
+各状態の年齢中央値は32～34歳であり、今回のデータでは、年齢分布がユーザー状態によって明確に異なるとはいえない。
+
+## 閾値の感度分析
+
+「低い」の定義を下位20%、25%、30%に変え、両方が低いユーザーの人数と割合を比較する。プレイ回数は離散的なため、分位点境界以下に含まれる人数の割合が指定した割合と一致しない場合がある。境界値・該当人数・分析対象数をあわせて示す。
+
+```{r}
+sensitivity <- do.call(rbind, lapply(c(.20, .25, .30), function(p) {
+  cp <- unname(quantile(base_data$SessionCount, p, type = 7))
+  ca <- unname(quantile(base_data$InAppPurchaseAmount, p, type = 7))
+  both <- base_data$SessionCount <= cp & base_data$InAppPurchaseAmount <= ca
+  data.frame(
+    分位点_percent = 100 * p,
+    プレイ回数境界 = cp,
+    課金額境界 = ca,
+    両方低い人数 = sum(both),
+    分析対象数 = length(both),
+    両方低い割合_percent = 100 * mean(both)
+  )
+}))
+sensitivity
+```
+
+低プレイ・低課金の判定基準による結果の変化を確認するため、下位20%、25%、30%を基準とした感度分析を行った。\
+その結果、両方に該当するユーザーは、下位20%基準で112人（3.88%）、25%基準で217人（7.51%）、30%基準で276人（9.56%）であった。判定基準を広げると該当者の割合も増加したため、該当者数や割合は、低プレイ・低課金とする境界の設定に左右される。したがって、7.51%という割合は、下位25%を基準とした場合の結果として解釈する必要がある。
+
+## まとめ
+
+### 分析手法
+
+- **分析対象の設定**
+
+  - 各分析に必要な変数がそろっている利用者を対象とした。
+
+  - 必要な変数が分析ごとに異なるため、分析によって対象者数は異なる。
+
+- **低プレイ・低課金の基準設定**
+
+  - プレイ回数とアプリ内課金額の第1四分位数を、それぞれの判定基準とした。
+
+  - 各基準以下の利用者を「低プレイ」「低課金」と判定した。
+
+- **変数の分布と該当割合の確認**
+
+  - プレイ回数と課金額の要約統計量や分布を確認した。
+
+  - 低プレイと低課金の両方に該当する利用者の人数と割合を算出した。
+
+- **属性との関連分析**
+
+  - 年齢・国・端末・ゲームジャンルと、低プレイ・低課金の代理指標との関連をロジスティック回帰分析で検討した。
+
+  - 国・端末・ゲームジャンルについては、尤度比検定を用いて変数全体としての関連も評価した。
+
+- **4状態の分類と比較**
+
+  - 利用者を「低プレイのみ」「低課金のみ」「低プレイ・低課金の両方」「どちらも低くない」の4状態に分類した。
+
+  - ゲームジャンルごとの状態構成をクロス集計し、シミュレーションによるカイ二乗検定で関連を検討した。
+
+  - Kruskal–Wallis検定を用いて、4状態間の年齢分布を比較した。
+
+- **判定基準の感度分析**
+
+  - 判定基準を下位20%、25%、30%に変え、低プレイ・低課金の両方に該当する人数と割合を比較した。
+
+- **指標の解釈**
+
+  - 低プレイ・低課金は利用者行動の代理指標として扱った。
+
+  - 実際のゲーム離脱やサービス終了を直接測定する分析ではない。

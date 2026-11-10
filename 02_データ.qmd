@@ -1,183 +1,211 @@
 ---
 title: "データ"
+execute:
+  echo: true
+  warning: false
+  message: false
 ---
 
-:::{.callout-tip title="書き方ガイド：データ"}
-**何を書くか：** 分析に使用するデータの全体像を示す章です。データの出典・構造・基本統計量・可視化を通じて、読者がデータを十分に理解できるようにします。
+| 項目           | 内容                                       |
+|:---------------|:-------------------------------------------|
+| 利用データ     | Mobile Game In-App Purchases Dataset 2025  |
+| 取得元         | Kaggle（Pratyush Puri 氏公開データセット） |
+| データファイル | `mobile_game_inapp_purchases.csv`          |
+| 取得日         | 2026年10月13日                             |
+| レコード数     | 3,024件（欠損値処理前）                    |
+| 変数数         | 13変数                                     |
+| ライセンス     | CC0: Public Domain（Kaggle掲載情報）       |
 
-**書き方のコツ：**
+: データの出典
 
-- **データ概要** では、取得元・期間・サンプル数・変数の一覧を明示します
-- **基本統計量** は表形式で整理し、データの分布を把握できるようにします
-- **可視化** は目的を明確にして（例：「時系列の傾向を確認する」）、図にキャプションと番号を付けます
-- 前処理の手順はフロー図で示すと理解しやすくなります
-
-**Quartoの機能：**
-
-- R コードブロック `` ```{r} `` でデータ処理と可視化を実行できます
-- `#| label: fig-xxx` と `#| fig-cap:` で図番号とキャプションを自動付与します
-- `@fig-xxx` で本文中からクロスリファレンスできます
-- `::: {.panel-tabset}` でタブ切替パネルを作成できます
-- Mermaid 記法でフロー図を描けます
-:::
-
-
-## データの出典
-
-| 項目 | 内容 |
-|------|------|
-| 利用データ | 東京都シェアサイクル事業オープンデータ（※実際の出典に置き換えてください） |
-| 気象データ | 気象庁 過去の気象データ検索（※実際の出典に置き換えてください） |
-| 取得日 | 2025年○月○日 |
-| 前処理スクリプト | `src/generate_data.R` |
-
-: データの出典 {#tbl-data-source}
-
+出典：[Kaggle掲載ページ](https://www.kaggle.com/datasets/pratyushpuri/mobile-game-in-app-purchases-dataset-2025)
 
 ## データの準備
 
-```{r}
-#| label: setup-data
-#| code-summary: "データ読み込み"
+Kaggleで公開されている `mobile_game_inapp_purchases.csv` を読み込み、分析に使う列の存在、データ型、欠損値を確認する。掲載ページでは、本データはモバイルゲーム利用者の属性・利用行動・アプリ内課金行動を含む合成データと説明されている。実際のゲーム利用ログではない点に留意する。
 
-bike_data <- read.csv("data/bike_data.csv")
-bike_data$date <- as.Date(bike_data$date)
-bike_data$wday <- factor(bike_data$wday,
-  levels = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))
+```{r}
+csv_path <- "C:/Users/js201/OneDrive/ドキュメント/2026春/ゼミ2/データセット/mobile_game_inapp_purchases.csv"
+raw_data <- read.csv(
+  csv_path,
+  check.names = FALSE,
+  stringsAsFactors = FALSE,
+  na.strings = c("", "NA")
+)
+
+required <- c(
+  "UserID", "Age", "Gender", "Country", "Device", "GameGenre",
+  "SessionCount", "AverageSessionLength", "SpendingSegment",
+  "InAppPurchaseAmount", "FirstPurchaseDaysAfterInstall",
+  "PaymentMethod", "LastPurchaseDate"
+)
+missing_columns <- setdiff(required, names(raw_data))
+if (length(missing_columns) > 0) {
+  stop("CSVに必要な列がありません: ", paste(missing_columns, collapse = ", "))
+}
+
+# 空文字列を欠損値にそろえ、数値・日付列の型を整える
+clean_text <- function(x) {
+  x <- trimws(as.character(x))
+  x[x == ""] <- NA_character_
+  x
+}
+
+game_data <- raw_data
+text_columns <- c("UserID", "Gender", "Country", "Device", "GameGenre",
+                  "SpendingSegment", "PaymentMethod")
+for (v in text_columns) game_data[[v]] <- clean_text(game_data[[v]])
+
+numeric_columns <- c("Age", "SessionCount", "AverageSessionLength",
+                     "InAppPurchaseAmount", "FirstPurchaseDaysAfterInstall")
+for (v in numeric_columns) {
+  game_data[[v]] <- suppressWarnings(as.numeric(game_data[[v]]))
+}
+game_data$LastPurchaseDate <- as.Date(clean_text(game_data$LastPurchaseDate))
+
+cat("CSV全体:", nrow(game_data), "件、", ncol(game_data), "変数\n")
+cat("列名・型:\n")
+str(game_data)
 ```
 
+```{r}
+missing_summary <- data.frame(
+  変数 = required,
+  欠損数 = vapply(game_data[required], function(x) sum(is.na(x)), numeric(1)),
+  欠損割合 = round(vapply(game_data[required], function(x) mean(is.na(x)), numeric(1)) * 100, 1)
+)
+missing_summary
+```
 
 ## データ概要
 
-本研究では、東京都内のシェアサイクル利用数と気象データを組み合わせた合成データセットを使用する。
+本データは利用者単位の合成データで、年齢・性別・国・端末・ゲームジャンルなどの属性に加え、セッション数、平均セッション時間、課金区分、課金総額、初回購入までの日数、支払方法、最終購入日を含む。Kaggle掲載ページでは3,024件・13変数とされ、欠損値を含む。
+
+本研究は「モバイルゲームにおける過疎及び低課金ユーザーの行動特徴とサービス終了リスクに関する研究」で扱った問題意識と分析の流れを土台とする。プレイ回数（`SessionCount`）と課金額（`InAppPurchaseAmount`）の双方が低いユーザーを二値指標で捉え、属性・ジャンルとの関係を調べたうえで、両指標の低さを分けた4状態も分析する。これらは同じデータに対する一連の分析である。なお、このデータには実際の離脱・退会やゲームタイトルのサービス終了実績はないため、分類は実測されたサービス終了リスクではなく、ユーザー行動の代理指標として扱う。
 
 | 項目 | 内容 |
-|------|------|
-| 対象期間 | 2024年1月1日 〜 2024年12月31日（365日間） |
-| 時間粒度 | 1時間単位 |
-| レコード数 | 8,760件（365日 × 24時間） |
-| 目的変数 | 1時間あたりの利用数（count） |
-| 説明変数 | 気温、湿度、風速、降雨有無、曜日、時間帯 |
+|:-----------------|:-----------------------------------------------------|
+| データの単位 | 利用者単位（1行が1レコード） |
+| データの性質 | Kaggle掲載者の説明による合成データ |
+| 主要な行動指標 | セッション数、平均セッション時間、課金総額、初回購入までの日数、最終購入日 |
+| 本研究の分析 | 二値指標と属性・ジャンルの関連、4状態の構成とジャンル別比較 |
+| 主な制約 | 実際の利用ログ・継続／離脱結果・サービス終了実績は含まれない |
 
-: データセットの概要 {#tbl-data-overview}
+分析ごとに利用可能な項目が異なるため、対象者数を区別する。二値指標の境界は年齢・プレイ回数・課金額がそろう2,835人で求め、属性を含む回帰モデルはさらに国・端末・ジャンルの欠損を除いた2,667人を用いる。一方、4状態分析は年齢を条件とせず、プレイ回数と課金額がそろう2,888人を対象とする。このため、二値分析と4状態分析では境界値や該当者数がわずかに異なる。
 
-### 変数一覧
+| 変数名 | 型 | 説明 | 単位・値 |
+|:-----------------|:-----------------|:------------------|:-----------------|
+| `UserID` | 文字列 | 利用者の識別子 | UUID形式 |
+| `Age` | 整数 | 利用者の年齢 | 歳（説明上13～54歳） |
+| `Gender` | 文字列 | 性別区分 | Male、Female、Other |
+| `Country` | 文字列 | 国・地域 | 複数のゲーム市場 |
+| `Device` | 文字列 | 利用端末 | iOS、Android等 |
+| `GameGenre` | 文字列 | 主なゲームジャンル | MOBA、Puzzle、Racing等 |
+| `SessionCount` | 整数 | ゲームセッション数 | 回 |
+| `AverageSessionLength` | 数値 | 1セッションあたりの平均時間 | 分 |
+| `SpendingSegment` | 文字列 | 課金区分 | Whale、Dolphin、Minnow |
+| `InAppPurchaseAmount` | 数値 | アプリ内課金総額 | 米ドル |
+| `FirstPurchaseDaysAfterInstall` | 整数 | インストールから初回購入までの日数 | 日 |
+| `PaymentMethod` | 文字列 | 支払方法 | クレジットカード、PayPal等 |
+| `LastPurchaseDate` | 日付 | 最後の購入日 | 2025年の日付（掲載ページの説明） |
 
-| 変数名 | 型 | 説明 | 単位 |
-|--------|-------|------|------|
-| `date` | Date | 日付 | - |
-| `hour` | integer | 時間帯（0–23） | 時 |
-| `temperature` | numeric | 気温 | °C |
-| `humidity` | numeric | 相対湿度 | % |
-| `wind_speed` | numeric | 風速 | m/s |
-| `is_rain` | integer | 降雨フラグ（0/1） | - |
-| `count` | integer | 利用数（目的変数） | 台 |
-
-: 変数一覧 {#tbl-variables}
-
+: 変数一覧
 
 ## 基本統計量
 
-```{r}
-#| label: tbl-summary-stats
-#| tbl-cap: "基本統計量"
-#| code-summary: "基本統計量の算出"
+主要な連続変数の分布を確認する。4状態分析はプレイ回数と課金額の両方が観測されているレコードを対象とし、年齢比較はさらに年齢が観測されているレコードを対象とする。欠損値処理の結果、分析ごとに標本数は異なる。
 
-vars <- c("temperature", "humidity", "wind_speed", "count")
-stats <- do.call(rbind, lapply(vars, function(v) {
-  x <- bike_data[[v]]
-  data.frame(
-    変数 = v,
-    平均 = round(mean(x), 1),
-    標準偏差 = round(sd(x), 1),
-    最小 = round(min(x), 1),
-    中央値 = round(median(x), 1),
-    最大 = round(max(x), 1)
-  )
-}))
-knitr::kable(stats, row.names = FALSE)
+```{r}
+main_data <- game_data[complete.cases(
+  game_data[c("SessionCount", "InAppPurchaseAmount")]
+), ]
+age_data <- main_data[!is.na(main_data$Age), ]
+
+cat("4状態分析の対象 N =", nrow(main_data), "\n")
+cat("年齢比較の対象 N =", nrow(age_data), "\n")
 ```
 
+```{r}
+summary_variables <- c("Age", "SessionCount", "AverageSessionLength",
+                       "InAppPurchaseAmount", "FirstPurchaseDaysAfterInstall")
+summary_data <- do.call(rbind, lapply(summary_variables, function(v) {
+  x <- game_data[[v]]
+  data.frame(
+    変数 = v,
+    有効件数 = sum(!is.na(x)),
+    平均 = mean(x, na.rm = TRUE),
+    標準偏差 = sd(x, na.rm = TRUE),
+    最小 = min(x, na.rm = TRUE),
+    中央値 = median(x, na.rm = TRUE),
+    最大 = max(x, na.rm = TRUE)
+  )
+}))
+summary_data[, -1] <- lapply(summary_data[, -1], function(x) round(x, 2))
+summary_data
+```
 
 ## 時系列の可視化
 
-@fig-timeseries は日別の平均利用数の推移を示す。夏季に利用数が増加し、冬季に減少する季節パターンが確認できる。
+`LastPurchaseDate` は各レコードに記録された最後の購入日であり、ユーザーの連続した利用履歴ではない。そのため、月別件数はデータ内の日付の分布を示すもので、利用者数や継続率の時系列推移を表すものではない。
 
 ```{r}
-#| label: fig-timeseries
-#| fig-cap: "日別平均利用数の推移"
-#| code-summary: "時系列グラフの作成"
+valid_dates <- game_data$LastPurchaseDate[!is.na(game_data$LastPurchaseDate)]
 
-daily_avg <- aggregate(count ~ date, data = bike_data, FUN = mean)
+if (length(valid_dates) > 0) {
+  month_counts <- table(format(valid_dates, "%Y-%m"))
 
-plot(daily_avg$date, daily_avg$count, type = "l", col = "#2F5496",
-     xlab = "日付", ylab = "平均利用数（台/時間）", lwd = 1.5)
+  par(mar = c(8, 4, 4, 2))
+  barplot(
+    month_counts,
+    las = 2,
+    cex.names = 0.8,
+    col = "#4E79A7",
+    xlab = "",
+    ylab = "レコード数",
+    main = "最終購入日の年月別分布"
+  )
+  mtext("最終購入日の年月", side = 1, line = 6)
+  par(mar = c(5, 4, 4, 2))
+} else {
+  cat("有効なLastPurchaseDateがないため、図を作成できません。")
+}
 ```
 
+最終購入日の年月別にレコード数を集計したところ、2025年1月から7月まではおおむね350～420件で推移し、5月と7月に多かった。一方、8月は約175件と少なかった。ただし、この集計は各月に最終購入日が記録されたレコード数を示すものであり、月ごとの購入総数や利用者の離脱数を直接示すものではない。
 
-## 気象データとの関係
+## プレイ頻度と課金額の関係
 
-@fig-scatter-temp は気温と利用数の関係を示す散布図である。気温が高いほど利用数が増加する正の相関が認められる。
+プレイ回数と課金額の分布および関連を確認する。課金額には極端に大きい値があるため、散布図では `log1p` 変換した値も表示する。相関は順位に基づくSpearmanの相関係数を用いる。
 
 ```{r}
-#| label: fig-scatter-temp
-#| fig-cap: "気温と利用数の関係"
-#| code-summary: "散布図の作成"
-
-set.seed(42)
-idx <- sample(nrow(bike_data), 2000)
-sample_data <- bike_data[idx, ]
-
-plot(sample_data$temperature, sample_data$count,
-     pch = 16, col = adjustcolor("#2F5496", 0.3), cex = 0.6,
-     xlab = "気温（°C）", ylab = "利用数（台）")
+cor_data <- main_data[complete.cases(
+  main_data[c("SessionCount", "InAppPurchaseAmount")]
+), ]
+plot(cor_data$SessionCount, log1p(cor_data$InAppPurchaseAmount),
+     pch = 16, col = grDevices::adjustcolor("#4E79A7", alpha.f = 0.35),
+     xlab = "ゲームセッション数（回）",
+     ylab = "課金総額 log(1 + USD)",
+     main = "プレイ回数と課金総額の関係")
+cor.test(cor_data$SessionCount, cor_data$InAppPurchaseAmount,
+         method = "spearman", exact = FALSE)
 ```
 
+セッション数と課金総額の関係を散布図で確認したところ、同じセッション数でも課金総額には大きなばらつきが見られ、両者の明確な傾向は視覚的には確認しにくかった。統計的な関連の有無は、Spearmanの順位相関検定の相関係数とp値に基づいて判断した。
 
-## 曜日・時間帯パターン
-
-::: {.panel-tabset}
-
-### 時間帯別
-
-```{r}
-#| label: fig-hourly-pattern
-#| fig-cap: "時間帯別の平均利用数"
-#| code-summary: "時間帯別集計"
-
-hourly_avg <- aggregate(count ~ hour, data = bike_data, FUN = mean)
-
-barplot(hourly_avg$count, names.arg = hourly_avg$hour,
-        col = "#2F5496", xlab = "時間帯", ylab = "平均利用数（台）",
-        las = 1)
-```
-
-### 曜日別
-
-```{r}
-#| label: fig-wday-pattern
-#| fig-cap: "曜日別の平均利用数"
-#| code-summary: "曜日別集計"
-
-wday_avg <- aggregate(count ~ wday, data = bike_data, FUN = mean)
-
-barplot(wday_avg$count, names.arg = wday_avg$wday,
-        col = "#4472C4", xlab = "曜日", ylab = "平均利用数（台）",
-        las = 1)
-```
-
-:::
-
+セッション数と課金総額の関係をSpearmanの順位相関検定で分析した。その結果、統計的に有意な相関は確認されなかった（ρ = 0.0067、p = 0.7179）。散布図でも、セッション数が多いほど課金総額が一貫して増加する傾向は明確ではなかった。したがって、今回のデータでは、セッション数と課金総額の間に明確な単調な関連があるとはいえない。
 
 ## 前処理パイプライン
+
+本研究では、欠損処理後に `SessionCount` と `InAppPurchaseAmount` の下位25%境界をそれぞれ求め、二値指標と4状態の分類に用いる。分析対象の定義に応じて境界値が異なる場合は、第3章・第4章で明記する。
 
 ```{mermaid}
 %%| label: fig-preprocess
 %%| fig-cap: "データ前処理パイプライン"
 flowchart LR
-    A[元データ取得] --> B[欠損値処理]
-    B --> C[特徴量生成]
-    C --> D[時間帯・曜日<br>ダミー変数化]
-    D --> E[訓練/テスト分割]
-    E --> F[モデル入力]
+  A[KaggleのCSVを読み込む] --> B[列名と欠損値を確認]
+  B --> C[数値・日付・カテゴリ列の型を整える]
+  C --> D[プレイ回数と課金額が有効な行を抽出]
+  D --> E[各指標の下位25%境界を算出]
+  E --> F[低プレイ・低課金の4状態を作成]
+  F --> G[ジャンル別構成と感度分析]
 ```

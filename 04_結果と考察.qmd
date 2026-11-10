@@ -1,220 +1,167 @@
 ---
-title: "結果と考察"
+execute:
+  echo: true
+  warning: false
+  message: false
 ---
 
-:::{.callout-tip title="書き方ガイド：結果と考察"}
-**何を書くか：** モデルの学習結果・精度評価・分析結果を客観的に示し、その意味を考察する章です。報告書の中核となる最も重要な章です。
+# 結果と考察
 
-**書き方のコツ：**
+## 分析対象と4状態の構成
 
-- **結果** と **考察** を分けて書きます。結果は客観的事実、考察は解釈と意味づけです
-- 精度は表で比較し、どの手法が優れているかを明確にします
-- グラフは複数の観点から作成します（時系列、誤差分布、変数重要度など）
-- 考察では「なぜそうなったか」の仮説を示し、先行研究との関連を述べます
+本研究では、まずプレイ回数と課金額の両方が低いユーザーを二値指標で捉え、属性との関係を調べた。そのうえで、二つの指標の組み合わせを4状態に分け、ユーザー構成を詳しく見た。二値指標の分析では年齢・プレイ回数・課金額がそろう2,835人を用い、プレイ回数の第1四分位境界は8回、課金額の境界は約6.01、両方が境界以下のユーザーは216人（7.62%）だった。
 
-**Quartoの機能：**
+属性を含むロジスティック回帰では、国・端末・ジャンルの欠損を含む行を除いた2,667人が対象となり、二値指標の該当者は204人だった。これは、分析に必要な変数が揃う対象者が分析段階ごとに異なるためである。
 
-- R の基本グラフ関数（`plot`, `barplot`, `hist`）で可視化を作成できます
-- `::: {.panel-tabset}` でタブ切替パネルを使い、複数の図を整理できます
-- `knitr::kable()` で R の結果をきれいな表として出力できます
-:::
+4状態分析では年齢を必須にせず、プレイ回数と課金額が揃う2,888人を対象にした。境界はプレイ回数8回、課金額約5.99であった。対象者と境界が二値指標の分析と異なるため、該当者数にも差が出る。4状態の構成は次の通りである。
 
+| 状態 | 人数 | 割合 |
+|:--|--:|--:|
+| 低プレイのみ | 693人 | 24.00% |
+| 低課金のみ | 505人 | 17.49% |
+| 低プレイ・低課金の両方 | 217人 | 7.51% |
+| どちらも低くない | 1,473人 | 51.04% |
+| 合計 | 2,888人 | 100.00% |
 
-## モデル学習
-
-第2章と同一のデータを読み込み、訓練データ（80%）とテストデータ（20%）に分割した。線形回帰（`lm`）と回帰木（`rpart`）の2モデルを学習させた。
+以下のコードは、提出時に使うCSVから4状態の境界と件数を再計算する。
 
 ```{r}
-#| label: setup-model
-#| code-summary: "データ読み込み・モデル学習"
-#| warning: false
-#| message: false
-#| output: false
+csv_path <- "C:/Users/js201/OneDrive/ドキュメント/2026春/ゼミ2/データセット/mobile_game_inapp_purchases.csv"
+d <- read.csv(csv_path, check.names = FALSE, stringsAsFactors = FALSE,
+              na.strings = c("", "NA"))
+d$SessionCount <- suppressWarnings(as.numeric(d$SessionCount))
+d$InAppPurchaseAmount <- suppressWarnings(as.numeric(d$InAppPurchaseAmount))
+d$Age <- suppressWarnings(as.numeric(d$Age))
+d$GameGenre <- trimws(as.character(d$GameGenre))
+d$GameGenre[d$GameGenre == ""] <- NA_character_
+d <- d[complete.cases(d[c("SessionCount", "InAppPurchaseAmount")]), ]
 
-# --- データ読み込み ---
-bike_data <- read.csv("data/bike_data.csv")
-bike_data$date <- as.Date(bike_data$date)
-bike_data$wday <- factor(bike_data$wday,
-  levels = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))
-
-# --- モデリング用データ ---
-model_data <- bike_data[, !names(bike_data) %in% c("date", "wday")]
-model_data$month      <- factor(model_data$month)
-model_data$is_rain    <- factor(model_data$is_rain)
-model_data$is_weekend <- factor(model_data$is_weekend)
-
-# --- 訓練/テスト分割 ---
-set.seed(123)
-n <- nrow(model_data)
-train_idx  <- sample(n, floor(0.8 * n))
-train_data <- model_data[train_idx, ]
-test_data  <- model_data[-train_idx, ]
-
-# --- 線形回帰 ---
-lm_fit  <- lm(count ~ ., data = train_data)
-lm_pred <- predict(lm_fit, newdata = test_data)
-
-# --- 回帰木 ---
-library(rpart)
-tree_fit  <- rpart(count ~ ., data = train_data,
-                   control = rpart.control(maxdepth = 8, minsplit = 20))
-tree_pred <- predict(tree_fit, newdata = test_data)
-
-actual <- test_data$count
-
-# --- 評価関数 ---
-calc_mae  <- function(a, p) round(mean(abs(a - p)), 2)
-calc_rmse <- function(a, p) round(sqrt(mean((a - p)^2)), 2)
-calc_rsq  <- function(a, p) round(1 - sum((a - p)^2) / sum((a - mean(a))^2), 2)
-```
-
-
-## 精度比較
-
-@tbl-accuracy に各モデルのテストデータに対する精度評価結果を示す。
-
-```{r}
-#| label: tbl-accuracy
-#| tbl-cap: "モデル精度の比較"
-#| code-summary: "精度指標の算出"
-
-accuracy_table <- data.frame(
-  モデル = c("線形回帰", "回帰木（rpart）"),
-  MAE  = c(calc_mae(actual, lm_pred),  calc_mae(actual, tree_pred)),
-  RMSE = c(calc_rmse(actual, lm_pred), calc_rmse(actual, tree_pred)),
-  R2   = c(calc_rsq(actual, lm_pred),  calc_rsq(actual, tree_pred))
+cs <- unname(quantile(d$SessionCount, .25, type = 7))
+ca <- unname(quantile(d$InAppPurchaseAmount, .25, type = 7))
+d$low_play <- d$SessionCount <= cs
+d$low_spend <- d$InAppPurchaseAmount <= ca
+d$state <- with(d, ifelse(
+  low_play & low_spend, "低プレイ・低課金の両方",
+  ifelse(low_play, "低プレイのみ",
+         ifelse(low_spend, "低課金のみ", "どちらも低くない"))
+))
+d$state <- factor(
+  d$state,
+  levels = c("低プレイのみ", "低課金のみ",
+             "低プレイ・低課金の両方", "どちらも低くない")
 )
-names(accuracy_table)[4] <- "R\u00b2"
 
-knitr::kable(accuracy_table)
-```
-
-回帰木は全ての指標で線形回帰を上回っており、非線形な利用パターンの捕捉に有効であることが示された。
-
-
-## 予測結果の可視化
-
-@fig-pred-timeseries にテストデータの先頭200件における実測値と予測値の比較を示す。
-
-```{r}
-#| label: fig-pred-timeseries
-#| fig-cap: "実測値と予測値の比較（テストデータ先頭200件）"
-#| code-summary: "予測結果の時系列プロット"
-
-n_plot <- min(200, length(actual))
-idx <- seq_len(n_plot)
-
-plot(idx, actual[idx], type = "l", col = "black", lwd = 1.5,
-     xlab = "テストデータ インデックス", ylab = "利用数（台）",
-     ylim = range(c(actual[idx], lm_pred[idx], tree_pred[idx])))
-lines(idx, tree_pred[idx], col = "#2F5496", lwd = 1.5, lty = 3)
-lines(idx, lm_pred[idx],  col = "#C55A11", lwd = 1.5, lty = 2)
-legend("topright",
-       legend = c("実測値", "回帰木", "線形回帰"),
-       col = c("black", "#2F5496", "#C55A11"),
-       lty = c(1, 3, 2), lwd = 1.5, cex = 0.9)
-```
-
-
-## 誤差分析
-
-```{r}
-#| label: fig-error-hist
-#| fig-cap: "予測誤差の分布"
-#| code-summary: "誤差ヒストグラムの作成"
-
-lm_error   <- lm_pred - actual
-tree_error <- tree_pred - actual
-
-hist(lm_error, breaks = 50, col = adjustcolor("#C55A11", 0.5),
-     main = "", xlab = "予測誤差（台）", ylab = "頻度",
-     xlim = range(c(lm_error, tree_error)))
-hist(tree_error, breaks = 50, col = adjustcolor("#2F5496", 0.5), add = TRUE)
-legend("topright",
-       legend = c("線形回帰", "回帰木"),
-       fill = adjustcolor(c("#C55A11", "#2F5496"), 0.5), cex = 0.9)
-```
-
-@fig-error-hist より、回帰木の誤差分布は線形回帰と比べて中心（誤差ゼロ付近）に集中しており、予測のばらつきが小さいことが確認できる。
-
-
-## 変数重要度
-
-```{r}
-#| label: fig-importance
-#| fig-cap: "回帰木の変数重要度"
-#| code-summary: "変数重要度の抽出と可視化"
-
-imp <- tree_fit$variable.importance
-imp <- sort(imp)
-
-par(mar = c(5, 8, 2, 2))
-barplot(imp, horiz = TRUE, las = 1, col = "#2F5496",
-        xlab = "重要度", main = "")
-```
-
-@fig-importance より、`hour`（時間帯）と `temperature`（気温）が予測への寄与度が最も高い変数であることがわかる。
-
-
-## 曜日別精度
-
-::: {.panel-tabset}
-
-### MAE
-
-```{r}
-#| label: fig-wday-mae
-#| fig-cap: "曜日別 MAE（回帰木）"
-#| code-summary: "曜日別精度の算出"
-
-test_wday <- bike_data$wday[-train_idx]
-wday_err <- data.frame(
-  wday = test_wday,
-  abs_error = abs(tree_pred - actual)
+cat("4状態分析の対象 N =", nrow(d), "\n")
+cat("プレイ回数の境界 =", cs, "\n")
+cat("課金額の境界 =", ca, "\n")
+counts <- table(d$state)
+data.frame(
+  状態 = names(counts),
+  人数 = as.integer(counts),
+  割合_percent = round(100 * prop.table(counts), 2)
 )
-wday_mae <- aggregate(abs_error ~ wday, data = wday_err, FUN = mean)
-
-barplot(wday_mae$abs_error, names.arg = wday_mae$wday,
-        col = "#2F5496", xlab = "曜日", ylab = "MAE（台）", las = 1)
 ```
+プレイ回数と課金額の両方が得られた2,888人を対象に、それぞれの第1四分位数を基準として利用者を4状態に分類した。
+プレイ回数の境界は8回、課金額の境界は5.9875であった。
+「低プレイのみ」は693人（24.00%）、「低課金のみ」は505人（17.49%）、「低プレイ・低課金の両方」は217人（7.51%）、「どちらも低くない」は1,473人（51.00%）であった。
 
-### RMSE
+
+## ジャンル別の状態構成
 
 ```{r}
-#| label: fig-wday-rmse
-#| fig-cap: "曜日別 RMSE（回帰木）"
-#| code-summary: "曜日別 RMSE の算出"
+#| fig-width: 10
+#| fig-height: 9
 
-wday_sq_err <- data.frame(
-  wday = test_wday,
-  sq_error = (tree_pred - actual)^2
+genre_state <- table(d$GameGenre, d$state, useNA = "no")
+genre_prop <- prop.table(genre_state, margin = 1)
+
+par(mar = c(8, 11, 4, 2), xpd = NA)
+
+barplot(
+  t(genre_prop),
+  names.arg = colnames(t(genre_prop)),
+  horiz = TRUE,
+  las = 1,
+  axes = FALSE,
+  xlim = c(0, 1),
+  cex.names = 0.8,
+  col = c("#4E79A7", "#F28E2B", "#E15759", "#59A14F"),
+  xlab = "ジャンル内の割合",
+  main = "ゲームジャンル別・ユーザー状態の構成"
 )
-wday_rmse <- aggregate(sq_error ~ wday, data = wday_sq_err, FUN = function(x) sqrt(mean(x)))
-names(wday_rmse)[2] <- "RMSE"
 
-barplot(wday_rmse$RMSE, names.arg = wday_rmse$wday,
-        col = "#4472C4", xlab = "曜日", ylab = "RMSE（台）", las = 1)
+axis(1, at = seq(0, 1, 0.2), labels = sprintf("%.1f", seq(0, 1, 0.2)))
+
+legend(
+  "bottom",
+  inset = c(0, -0.48),
+  xpd = NA,
+  ncol = 2,
+  bty = "n",
+  fill = c("#4E79A7", "#F28E2B", "#E15759", "#59A14F"),
+  legend = levels(d$state),
+  cex = 0.8
+)
+
+par(xpd = FALSE))
 ```
 
-:::
+二値指標を用いてジャンル別割合を記述すると、ジャンルごとに割合の違いが見られた。ただし、年齢・国・端末を調整したロジスティック回帰では、ジャンル全体の尤度比検定は有意ではなかった（p = .534）。そのため、棒グラフ上の差だけから、ジャンルによる明確な違いがあるとは結論できない。
+続いて、利用者を4状態に分類し、ジャンルごとの構成を比較した。シミュレーションによるカイ二乗検定の結果、ジャンルと4状態の間に統計的に有意な関連は確認されなかった（χ² = 42.478、p = .4556）。以上から、今回の分析では、ジャンルによるユーザー状態の明確な違いは確認できなかった。
 
+各ゲームジャンルの利用者を、低プレイのみ、低課金のみ、低プレイ・低課金の両方、どちらも低くない、の4状態に分類し、ジャンルごとの割合を比較した。
+「低プレイ・低課金の両方」の割合は、Sportsで最も高く10.0%、次いでSandboxが9.7%、MMORPGが9.6%であった。一方、Cardでは4.1%、MOBAとPuzzleでは4.6%であった。ただし、ジャンルとユーザー状態の関連を検定した結果、統計的に有意な関連は確認されなかった（χ² = 42.478、p = 0.4556）。
+したがって、ジャンルによって状態の割合に差があるように見えるものの、今回の分析から、ゲームジャンルとユーザー状態に明確な関連があるとはいえない。
+
+
+
+ジャンルと4状態の検定は、期待度数が小さいカテゴリの影響を考慮し、モンテカルロ法でp値を求めた。
+```{r}
+set.seed(20261013)
+chisq.test(genre_state, simulate.p.value = TRUE, B = 10000)
+```
+
+シミュレーションによるカイ二乗検定の結果、ジャンルとユーザー状態の間に統計的に有意な関連は確認されなかった（χ² = 42.478、p = .4556）。したがって、今回の分析では、ゲームジャンルによるユーザー状態の明確な違いは確認できなかった。
+
+## 4状態別の年齢分布
+
+```{r}
+age_data <- d[!is.na(d$Age), ]
+aggregate(Age ~ state, data = age_data, FUN = median)
+kruskal.test(Age ~ state, data = age_data)
+```
+
+年齢が得られた利用者を対象に、4状態間で年齢分布を比較した。各状態の年齢中央値は、「低プレイのみ」が32歳、「低課金のみ」が34歳、「低プレイ・低課金の両方」が34歳、「どちらも低くない」が33歳であった。
+Kruskal–Wallis検定の結果、4状態間に統計的に有意な差は確認されなかった（χ²(3) = 1.9374、p = .5855）。したがって、今回の分析では、ユーザー状態によって年齢分布が明確に異なるとはいえない。
+
+## 閾値の感度分析
+低プレイ・低課金の判定基準を下位20%、25%、30%に変えて、両方に該当する利用者の人数と割合を比較した。
+
+```{r}
+sensitivity <- do.call(rbind, lapply(c(.20, .25, .30), function(p) {
+  cs <- unname(quantile(d$SessionCount, p, type = 7))
+  ca <- unname(quantile(d$InAppPurchaseAmount, p, type = 7))
+  both <- d$SessionCount <= cs & d$InAppPurchaseAmount <= ca
+  data.frame(
+    分位点_percent = 100 * p,
+    プレイ境界 = cs,
+    課金境界 = ca,
+    両方低い人数 = sum(both),
+    両方低い割合_percent = 100 * mean(both)
+  )
+}))
+sensitivity
+```
+
+判定基準を下位20%から30%へ広げると、低プレイ・低課金の両方に該当する利用者は112人（3.88%）から276人（9.56%）へ増加した。このことから、該当者数と割合は判定基準の設定によって変化する。
+したがって、下位25%を用いた場合の7.51%は、その基準に基づく結果として解釈する必要がある。
+
+//「このデータには低プレイ・低課金の人が必ず7.51%いる」と決まっているわけではありません。**「プレイ回数と課金額の下位25%を低いと定義した場合、両方に該当する人は7.51%だった」**という意味です。論文では、どの基準を使った割合なのかを明記すれば、結果を正確に伝えられます。
 
 ## 考察
 
-本章の分析結果から、以下の考察が得られる。
+本研究では、利用者を「低プレイのみ」「低課金のみ」「両方」「どちらも低くない」の4状態に分類した。「低プレイのみ」は693人（24.00%）、「低課金のみ」は505人（17.49%）、「両方」は217人（7.51%）であり、プレイ回数の少なさと課金額の少なさは一部重なるものの、同じ利用者層とは限らないことが示された。
 
-### モデル性能について
+ロジスティック回帰分析では、年齢・国・端末・ジャンルとの明確な関連は確認されなかった。4状態についても、ジャンルとの関連（χ² = 42.478、p = .4556）や年齢分布の差（χ²(3) = 1.9374、p = .5855）は確認されなかった。ただし、これは関連が存在しないことの証明ではない。
 
-回帰木は線形回帰と比較して全ての評価指標で優れた性能を示した（@tbl-accuracy）。これは、シェアサイクルの利用パターンが時間帯や気象条件と**非線形な関係**を持つためと考えられる。例えば、通勤時間帯（7-9時、17-19時）に利用数が集中するパターンは、線形モデルでは捉えにくい。
-
-### 影響要因について
-
-変数重要度分析（@fig-importance）から、以下の知見が得られた。
-
-1. **時間帯（hour）** が最も重要な変数であり、シェアサイクルの利用は通勤・通学の移動パターンに強く依存している
-2. **気温（temperature）** が2番目に重要であり、気象条件がシェアサイクルの利用判断に大きく影響する。先行研究 [@Eren2020] の知見とも一致する
-3. **降雨（is_rain）** は利用数を大きく減少させる要因であり、需要予測において重要な変数である
-
-### 先行研究との比較
-
-@Fanaee2014 が示したバイクシェアリングデータにおけるイベント検出の知見と同様に、気象条件と時間帯が利用パターンの主要な決定要因であることが確認された。また、@Singhvi2015 が報告した NYC Citi Bike の予測事例と比較しても、非線形手法の有効性は同様の傾向を示している。
+感度分析では、両方に該当する割合は判定基準によって3.88～9.56%に変化した。また、本データには実際の離脱やサービス終了の記録がないため、低プレイ・低課金状態をサービス終了リスクとして解釈することはできない。今後は、観測期間が明確な利用ログや離脱記録を用いて、利用者の行動状態と継続・離脱との関係を検討する必要がある。
