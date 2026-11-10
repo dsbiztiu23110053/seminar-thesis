@@ -34,27 +34,37 @@
     "href": "01_研究概要.html",
     "title": "1  研究概要",
     "section": "",
-    "text": "1.1 研究件名\nモバイルゲームにおける過疎・低課金化とユーザーの生活障害リスクに関する総合的実証研究",
+    "text": "1.1 研究件名\nモバイルゲームにおける低プレイ・低課金ユーザーの構成と特徴\n―行動指標の分類とジャンル・属性の分析―",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
     ]
   },
   {
-    "objectID": "01_研究概要.html#研究の背景",
-    "href": "01_研究概要.html#研究の背景",
+    "objectID": "01_研究概要.html#研究背景",
+    "href": "01_研究概要.html#研究背景",
     "title": "1  研究概要",
-    "section": "1.2 研究の背景",
-    "text": "1.2 研究の背景\n近年、モバイルゲーム市場の競争激化に伴い、サービス終了（サ終）の事例が相次いでいる。ゲーム運営におけるサービス終了の直接的要因は「アクティブユーザーの減少（過疎化）」と「売上の低迷（低課金）」の同時発生であるが、従来のマーケティング研究では「なぜユーザーがプレイ頻度を減らし、離脱していくのか」という根本的な生活・行動要因の解明が不十分であった。\n一方で、近年の過剰なゲームプレイや高スクリーンタイムは、ユーザーの「睡眠障害（生活リズムの乱れ）」「運動不足（身体活動量の低下・BMI上昇）」「学力・生産性の低下」「メンタルヘルスの悪化（ストレス・孤独感・不安）」といった様々な生活障害（ディスワイル）を引き起こすことが指摘されている。\nこれらのユーザー側の身体的・精神的・社会的障害は、短期的には過剰プレイを招くものの、中長期的には「バーンアウト（燃え尽き）」「ゲーム疲れ」「生活環境の変化による強制離脱」を誘発し、結果としてゲームの過疎化や低課金化、ひいてはサービス終了リスクを急加速させる要因（負の連鎖）になっていると考えられる。\nしたがって、サービス終了を未然に防ぎ、持続可能なゲーム運営（サステナブル・ゲーミング）を実現するためには、ゲーム内の課金・プレイデータだけでなく、ユーザーの生活障害リスクを含めた多角的なアプローチによる実証的解明が不可欠である。",
+    "section": "1.2 研究背景",
+    "text": "1.2 研究背景\n本研究は「モバイルゲームにおける過疎及び低課金ユーザーの行動特徴とサービス終了リスクに関する研究」で扱った問題意識と分析を出発点とする。その分析では、プレイ回数とアプリ内課金額の両方が下位25%にあるユーザーを一つの群として定義し、年齢・国・端末・ゲームジャンルとの関連をロジスティック回帰で検討した。プレイ頻度と課金の少なさを組み合わせてユーザー状態を把握する枠組みを引き継ぎ、分類の構成をより詳しく調べる。\n二つの指標を一つの二値群にまとめると、「プレイだけが少ない人」と「課金だけが少ない人」の違いは見えない。この分類上の問いを起点に、二値指標と属性の関係を分析したうえで、プレイ頻度と課金額を組み合わせた4状態を調べる。分析に用いるCSVには実際の退会・離脱、継続期間、ゲームタイトル単位の利用者推移、サービス終了実績が含まれないため、状態は観測されたユーザー行動の代理指標として扱う。",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
     ]
   },
   {
-    "objectID": "01_研究概要.html#研究の目的",
-    "href": "01_研究概要.html#研究の目的",
+    "objectID": "01_研究概要.html#研究目的",
+    "href": "01_研究概要.html#研究目的",
     "title": "1  研究概要",
-    "section": "1.3 研究の目的",
-    "text": "1.3 研究の目的\n本研究の目的は以下の通りである。\n1.サービス終了リスクの定義と構造化 週プレイ回数（過疎）と累計課金額（低課金）に基づき、ゲーム運営上の「擬似的なサービス終了（サ終）リスク」を定義・可視化する。\n2.睡眠障害・生活リズム（睡眠リスク）の検証 ゲーム利用時間（Gaming ScreenTime）や夜間利用が、睡眠障害（SleepDisruption）や生活リズム崩壊に与える影響を分析する。\n3.運動不足・身体活動量（身体リスク）の検証 画面時間の増大が、歩数（Step Count）の低下やBMI（肥満度）上昇に与える影響を評価する。\n4.学力・生産性低下（社会リスク）の検証 ゲーム時間（Playing Hours）やプレイ頻度が、学生の学術的成功や生産性に与える負の影響を検証する。\n5.メンタルヘルス・ストレス（精神リスク）の検証 日々のゲーム時間とストレス・不安・抑うつ・孤独感スコア（Loneliness Score）の相関を明らかにする。",
+    "section": "1.3 研究目的",
+    "text": "1.3 研究目的\n本研究では、プレイ回数と課金額がともに低いユーザーを二値指標で捉え、その割合と年齢・国・端末・ジャンルとの関連を分析する。続いて、プレイ回数と課金額を別々に低い／低くないに分け、「低プレイのみ」「低課金のみ」「両方低い」「どちらも低くない」の4状態を作る。二値指標による全体像から4状態の内訳へと分析を進め、ジャンル・年齢との関係と閾値設定への依存を検討する。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
+    ]
+  },
+  {
+    "objectID": "01_研究概要.html#研究課題",
+    "href": "01_研究概要.html#研究課題",
+    "title": "1  研究概要",
+    "section": "1.4 研究課題",
+    "text": "1.4 研究課題\n\nプレイ回数と課金額の両方が低いユーザーはどの程度おり、年齢・国・端末・ジャンルとの関連が確認されるか。\nプレイ回数と課金額を分けた4状態はどのような構成になり、ジャンルや年齢による違いが確認されるか。\n「低い」とする基準を下位20%、25%、30%に変えたとき、両方が低いユーザーの割合はどの程度変わるか。",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
     ]
@@ -63,8 +73,18 @@
     "objectID": "01_研究概要.html#研究計画",
     "href": "01_研究概要.html#研究計画",
     "title": "1  研究概要",
-    "section": "1.4 研究計画",
-    "text": "1.4 研究計画\n\n研究スケジュール\n\n\n期間\n作業内容\n状態\n\n\n\n\n第1-2週\nテーマ選定・先行研究調査\n完了\n\n\n第3-4週\nデータ収集・前処理\n完了\n\n\n第5-8週\nモデル構築・精度評価\n完了\n\n\n第9-10週\n結果分析・考察\n完了\n\n\n第11-12週\n報告書作成・発表準備\n進行中\n\n\n\n\n進捗チェックリスト\n\n先行研究の調査\nデータの取得と前処理\n探索的データ分析（EDA）\n予測モデルの構築\n精度評価と比較\n変数重要度の分析\n報告書の最終版作成\n発表資料の作成",
+    "section": "1.5 研究計画",
+    "text": "1.5 研究計画\n同じCSVを用いて一連の分析を行う。年齢・プレイ回数・課金額がそろう対象者について下位25%の二値指標を作成し、ジャンル別集計と、年齢・国・端末・ジャンルを説明変数とするロジスティック回帰を行う。そのうえで、プレイ回数と課金額の両方が利用できる対象者を4状態に分類し、ジャンルとのクロス集計・カイ二乗検定、年齢分布のKruskal–Wallis検定、閾値の感度分析を行う。分析の対象者数と境界値をそれぞれ明記する。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
+    ]
+  },
+  {
+    "objectID": "01_研究概要.html#分析上の位置づけ",
+    "href": "01_研究概要.html#分析上の位置づけ",
+    "title": "1  研究概要",
+    "section": "1.6 分析上の位置づけ",
+    "text": "1.6 分析上の位置づけ\nプレイ回数と課金額から作る二値指標および4状態は、ユーザー行動を分類するための操作的な指標である。データに実際のサービス終了やユーザー離脱のラベルはなく、SessionCount の観測期間も明らかでないため、サービス終了確率・離脱確率・週あたりのプレイ回数としては解釈しない。横断的な合成データであることから、結果は記述的な構成または統計的関連として報告し、因果関係や市場全体への一般化を主張しない。",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
     ]
@@ -73,8 +93,8 @@
     "objectID": "01_研究概要.html#研究体制",
     "href": "01_研究概要.html#研究体制",
     "title": "1  研究概要",
-    "section": "1.5 研究体制",
-    "text": "1.5 研究体制\n\n研究体制\n\n\n項目\n内容\n\n\n\n\n所属\n東京国際大学 商学部 データサイエンスコース\n\n\n研究室\n竹田ゼミ（データアナリティクスゼミ）\n\n\n指導教員\n竹田 恒\n\n\n研究者\n小澤愛生（23110053）\n\n\n研究期間\n2025年度 春学期\n\n\n使用言語\nR（4.1以上）\n\n\n主要パッケージ\nなし（基本パッケージのみ）",
+    "section": "1.7 研究体制",
+    "text": "1.7 研究体制\nKaggleで公開された mobile_game_inapp_purchases.csv をRStudioで分析する。二値指標による分類から属性・ジャンルとの関係を調べ、さらに4状態の内訳へと進む一続きの研究として構成する。分析ごとに異なる標本の定義を明示し、データの性質、配布元の説明、ライセンスは第2章に示す。",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
     ]
@@ -84,27 +104,7 @@
     "href": "02_データ.html",
     "title": "2  データ",
     "section": "",
-    "text": "2.1 データの出典",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
-    ]
-  },
-  {
-    "objectID": "02_データ.html#データの出典",
-    "href": "02_データ.html#データの出典",
-    "title": "2  データ",
-    "section": "",
-    "text": "表 2.1: データの出典\n\n\n\n\n\n\n\n\n\n項目\n内容\n\n\n\n\n利用データ\n東京都シェアサイクル事業オープンデータ（※実際の出典に置き換えてください）\n\n\n気象データ\n気象庁 過去の気象データ検索（※実際の出典に置き換えてください）\n\n\n取得日\n2025年○月○日\n\n\n前処理スクリプト\nsrc/generate_data.R",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
-    ]
-  },
-  {
-    "objectID": "02_データ.html#データの準備",
-    "href": "02_データ.html#データの準備",
-    "title": "2  データ",
-    "section": "2.2 データの準備",
-    "text": "2.2 データの準備",
+    "text": "2.1 データの準備\n出典：Kaggle掲載ページ\nKaggleで公開されている mobile_game_inapp_purchases.csv を読み込み、分析に使う列の存在、データ型、欠損値を確認する。掲載ページでは、本データはモバイルゲーム利用者の属性・利用行動・アプリ内課金行動を含む合成データと説明されている。実際のゲーム利用ログではない点に留意する。\nコード\ncsv_path &lt;- \"C:/Users/js201/OneDrive/ドキュメント/2026春/ゼミ2/データセット/mobile_game_inapp_purchases.csv\"\nraw_data &lt;- read.csv(\n  csv_path,\n  check.names = FALSE,\n  stringsAsFactors = FALSE,\n  na.strings = c(\"\", \"NA\")\n)\n\nrequired &lt;- c(\n  \"UserID\", \"Age\", \"Gender\", \"Country\", \"Device\", \"GameGenre\",\n  \"SessionCount\", \"AverageSessionLength\", \"SpendingSegment\",\n  \"InAppPurchaseAmount\", \"FirstPurchaseDaysAfterInstall\",\n  \"PaymentMethod\", \"LastPurchaseDate\"\n)\nmissing_columns &lt;- setdiff(required, names(raw_data))\nif (length(missing_columns) &gt; 0) {\n  stop(\"CSVに必要な列がありません: \", paste(missing_columns, collapse = \", \"))\n}\n\n# 空文字列を欠損値にそろえ、数値・日付列の型を整える\nclean_text &lt;- function(x) {\n  x &lt;- trimws(as.character(x))\n  x[x == \"\"] &lt;- NA_character_\n  x\n}\n\ngame_data &lt;- raw_data\ntext_columns &lt;- c(\"UserID\", \"Gender\", \"Country\", \"Device\", \"GameGenre\",\n                  \"SpendingSegment\", \"PaymentMethod\")\nfor (v in text_columns) game_data[[v]] &lt;- clean_text(game_data[[v]])\n\nnumeric_columns &lt;- c(\"Age\", \"SessionCount\", \"AverageSessionLength\",\n                     \"InAppPurchaseAmount\", \"FirstPurchaseDaysAfterInstall\")\nfor (v in numeric_columns) {\n  game_data[[v]] &lt;- suppressWarnings(as.numeric(game_data[[v]]))\n}\ngame_data$LastPurchaseDate &lt;- as.Date(clean_text(game_data$LastPurchaseDate))\n\ncat(\"CSV全体:\", nrow(game_data), \"件、\", ncol(game_data), \"変数\\n\")\n\n\nCSV全体: 3024 件、 13 変数\n\n\nコード\ncat(\"列名・型:\\n\")\n\n\n列名・型:\n\n\nコード\nstr(game_data)\n\n\n'data.frame':   3024 obs. of  13 variables:\n $ UserID                       : chr  \"c9889ab0-9cfc-4a75-acd9-5eab1df0015c\" \"7c9e413c-ecca-45f2-a780-2826a07952a2\" \"fd61e419-1a92-4f43-a8c7-135842ad328a\" \"bdb7f6d1-ff9a-468c-afe7-43f32a94293e\" ...\n $ Age                          : num  49 15 23 31 37 38 20 34 38 46 ...\n $ Gender                       : chr  \"Male\" \"Male\" \"Male\" \"Male\" ...\n $ Country                      : chr  \"Norway\" \"Switzerland\" \"China\" \"Mexico\" ...\n $ Device                       : chr  \"Android\" \"iOS\" \"Android\" \"Android\" ...\n $ GameGenre                    : chr  \"Battle Royale\" \"Action RPG\" \"Fighting\" \"Racing\" ...\n $ SessionCount                 : num  9 11 9 12 10 16 9 15 10 18 ...\n $ AverageSessionLength         : num  12.83 19.39 8.87 19.56 15.23 ...\n $ SpendingSegment              : chr  \"Minnow\" \"Minnow\" \"Minnow\" \"Minnow\" ...\n $ InAppPurchaseAmount          : num  11.4 6.37 15.81 13.49 10.86 ...\n $ FirstPurchaseDaysAfterInstall: num  28 18 30 9 15 28 24 30 1 19 ...\n $ PaymentMethod                : chr  \"Apple Pay\" \"Debit Card\" \"Apple Pay\" \"Debit Card\" ...\n $ LastPurchaseDate             : Date, format: \"2025-03-19\" \"2025-06-08\" ...\nコード\nmissing_summary &lt;- data.frame(\n  変数 = required,\n  欠損数 = vapply(game_data[required], function(x) sum(is.na(x)), numeric(1)),\n  欠損割合 = round(vapply(game_data[required], function(x) mean(is.na(x)), numeric(1)) * 100, 1)\n)\nmissing_summary",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
     ]
@@ -113,8 +113,8 @@
     "objectID": "02_データ.html#データ概要",
     "href": "02_データ.html#データ概要",
     "title": "2  データ",
-    "section": "2.3 データ概要",
-    "text": "2.3 データ概要\n本研究では、東京都内のシェアサイクル利用数と気象データを組み合わせた合成データセットを使用する。\n\n\n\n表 2.2: データセットの概要\n\n\n\n\n\n項目\n内容\n\n\n\n\n対象期間\n2024年1月1日 〜 2024年12月31日（365日間）\n\n\n時間粒度\n1時間単位\n\n\nレコード数\n8,760件（365日 × 24時間）\n\n\n目的変数\n1時間あたりの利用数（count）\n\n\n説明変数\n気温、湿度、風速、降雨有無、曜日、時間帯\n\n\n\n\n\n\n\n変数一覧\n\n\n\n表 2.3: 変数一覧\n\n\n\n\n\n変数名\n型\n説明\n単位\n\n\n\n\ndate\nDate\n日付\n-\n\n\nhour\ninteger\n時間帯（0–23）\n時\n\n\ntemperature\nnumeric\n気温\n°C\n\n\nhumidity\nnumeric\n相対湿度\n%\n\n\nwind_speed\nnumeric\n風速\nm/s\n\n\nis_rain\ninteger\n降雨フラグ（0/1）\n-\n\n\ncount\ninteger\n利用数（目的変数）\n台",
+    "section": "2.2 データ概要",
+    "text": "2.2 データ概要\n本データは利用者単位の合成データで、年齢・性別・国・端末・ゲームジャンルなどの属性に加え、セッション数、平均セッション時間、課金区分、課金総額、初回購入までの日数、支払方法、最終購入日を含む。Kaggle掲載ページでは3,024件・13変数とされ、欠損値を含む。\n本研究は「モバイルゲームにおける過疎及び低課金ユーザーの行動特徴とサービス終了リスクに関する研究」で扱った問題意識と分析の流れを土台とする。プレイ回数（SessionCount）と課金額（InAppPurchaseAmount）の双方が低いユーザーを二値指標で捉え、属性・ジャンルとの関係を調べたうえで、両指標の低さを分けた4状態も分析する。これらは同じデータに対する一連の分析である。なお、このデータには実際の離脱・退会やゲームタイトルのサービス終了実績はないため、分類は実測されたサービス終了リスクではなく、ユーザー行動の代理指標として扱う。\n\n\n\n\n\n\n\n項目\n内容\n\n\n\n\nデータの単位\n利用者単位（1行が1レコード）\n\n\nデータの性質\nKaggle掲載者の説明による合成データ\n\n\n主要な行動指標\nセッション数、平均セッション時間、課金総額、初回購入までの日数、最終購入日\n\n\n本研究の分析\n二値指標と属性・ジャンルの関連、4状態の構成とジャンル別比較\n\n\n主な制約\n実際の利用ログ・継続／離脱結果・サービス終了実績は含まれない\n\n\n\n分析ごとに利用可能な項目が異なるため、対象者数を区別する。二値指標の境界は年齢・プレイ回数・課金額がそろう2,835人で求め、属性を含む回帰モデルはさらに国・端末・ジャンルの欠損を除いた2,667人を用いる。一方、4状態分析は年齢を条件とせず、プレイ回数と課金額がそろう2,888人を対象とする。このため、二値分析と4状態分析では境界値や該当者数がわずかに異なる。\n\n変数一覧\n\n\n\n\n\n\n\n\n変数名\n型\n説明\n単位・値\n\n\n\n\nUserID\n文字列\n利用者の識別子\nUUID形式\n\n\nAge\n整数\n利用者の年齢\n歳（説明上13～54歳）\n\n\nGender\n文字列\n性別区分\nMale、Female、Other\n\n\nCountry\n文字列\n国・地域\n複数のゲーム市場\n\n\nDevice\n文字列\n利用端末\niOS、Android等\n\n\nGameGenre\n文字列\n主なゲームジャンル\nMOBA、Puzzle、Racing等\n\n\nSessionCount\n整数\nゲームセッション数\n回\n\n\nAverageSessionLength\n数値\n1セッションあたりの平均時間\n分\n\n\nSpendingSegment\n文字列\n課金区分\nWhale、Dolphin、Minnow\n\n\nInAppPurchaseAmount\n数値\nアプリ内課金総額\n米ドル\n\n\nFirstPurchaseDaysAfterInstall\n整数\nインストールから初回購入までの日数\n日\n\n\nPaymentMethod\n文字列\n支払方法\nクレジットカード、PayPal等\n\n\nLastPurchaseDate\n日付\n最後の購入日\n2025年の日付（掲載ページの説明）",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
     ]
@@ -123,8 +123,8 @@
     "objectID": "02_データ.html#基本統計量",
     "href": "02_データ.html#基本統計量",
     "title": "2  データ",
-    "section": "2.4 基本統計量",
-    "text": "2.4 基本統計量\n\n\n\n\n表 2.4: 基本統計量\n\n\n\n\n\n\n変数\n平均\n標準偏差\n最小\n中央値\n最大\n\n\n\n\ntemperature\n15.0\n9.0\n-6.1\n15.1\n36.0\n\n\nhumidity\n60.0\n13.4\n20.0\n60.0\n100.0\n\n\nwind_speed\n2.5\n1.8\n0.0\n2.1\n15.3\n\n\ncount\n63.8\n54.0\n0.0\n48.0\n277.0",
+    "section": "2.3 基本統計量",
+    "text": "2.3 基本統計量\n主要な連続変数の分布を確認する。4状態分析はプレイ回数と課金額の両方が観測されているレコードを対象とし、年齢比較はさらに年齢が観測されているレコードを対象とする。欠損値処理の結果、分析ごとに標本数は異なる。\n\n\nコード\nmain_data &lt;- game_data[complete.cases(\n  game_data[c(\"SessionCount\", \"InAppPurchaseAmount\")]\n), ]\nage_data &lt;- main_data[!is.na(main_data$Age), ]\n\ncat(\"4状態分析の対象 N =\", nrow(main_data), \"\\n\")\n\n\n4状態分析の対象 N = 2888 \n\n\nコード\ncat(\"年齢比較の対象 N =\", nrow(age_data), \"\\n\")\n\n\n年齢比較の対象 N = 2835 \n\n\n\n\nコード\nsummary_variables &lt;- c(\"Age\", \"SessionCount\", \"AverageSessionLength\",\n                       \"InAppPurchaseAmount\", \"FirstPurchaseDaysAfterInstall\")\nsummary_data &lt;- do.call(rbind, lapply(summary_variables, function(v) {\n  x &lt;- game_data[[v]]\n  data.frame(\n    変数 = v,\n    有効件数 = sum(!is.na(x)),\n    平均 = mean(x, na.rm = TRUE),\n    標準偏差 = sd(x, na.rm = TRUE),\n    最小 = min(x, na.rm = TRUE),\n    中央値 = median(x, na.rm = TRUE),\n    最大 = max(x, na.rm = TRUE)\n  )\n}))\nsummary_data[, -1] &lt;- lapply(summary_data[, -1], function(x) round(x, 2))\nsummary_data",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
     ]
@@ -133,28 +133,18 @@
     "objectID": "02_データ.html#時系列の可視化",
     "href": "02_データ.html#時系列の可視化",
     "title": "2  データ",
-    "section": "2.5 時系列の可視化",
-    "text": "2.5 時系列の可視化\n図 2.1 は日別の平均利用数の推移を示す。夏季に利用数が増加し、冬季に減少する季節パターンが確認できる。\n\n\n\n\n\n\n\n\n図 2.1: 日別平均利用数の推移",
+    "section": "2.4 時系列の可視化",
+    "text": "2.4 時系列の可視化\nLastPurchaseDate は各レコードに記録された最後の購入日であり、ユーザーの連続した利用履歴ではない。そのため、月別件数はデータ内の日付の分布を示すもので、利用者数や継続率の時系列推移を表すものではない。\n\n\nコード\nvalid_dates &lt;- game_data$LastPurchaseDate[!is.na(game_data$LastPurchaseDate)]\n\nif (length(valid_dates) &gt; 0) {\n  month_counts &lt;- table(format(valid_dates, \"%Y-%m\"))\n\n  par(mar = c(8, 4, 4, 2))\n  barplot(\n    month_counts,\n    las = 2,\n    cex.names = 0.8,\n    col = \"#4E79A7\",\n    xlab = \"\",\n    ylab = \"レコード数\",\n    main = \"最終購入日の年月別分布\"\n  )\n  mtext(\"最終購入日の年月\", side = 1, line = 6)\n  par(mar = c(5, 4, 4, 2))\n} else {\n  cat(\"有効なLastPurchaseDateがないため、図を作成できません。\")\n}\n\n\n\n\n\n\n\n\n\n最終購入日の年月別にレコード数を集計したところ、2025年1月から7月まではおおむね350～420件で推移し、5月と7月に多かった。一方、8月は約175件と少なかった。ただし、この集計は各月に最終購入日が記録されたレコード数を示すものであり、月ごとの購入総数や利用者の離脱数を直接示すものではない。",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
     ]
   },
   {
-    "objectID": "02_データ.html#気象データとの関係",
-    "href": "02_データ.html#気象データとの関係",
+    "objectID": "02_データ.html#プレイ頻度と課金額の関係",
+    "href": "02_データ.html#プレイ頻度と課金額の関係",
     "title": "2  データ",
-    "section": "2.6 気象データとの関係",
-    "text": "2.6 気象データとの関係\n図 2.2 は気温と利用数の関係を示す散布図である。気温が高いほど利用数が増加する正の相関が認められる。\n\n\n\n\n\n\n\n\n図 2.2: 気温と利用数の関係",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
-    ]
-  },
-  {
-    "objectID": "02_データ.html#曜日時間帯パターン",
-    "href": "02_データ.html#曜日時間帯パターン",
-    "title": "2  データ",
-    "section": "2.7 曜日・時間帯パターン",
-    "text": "2.7 曜日・時間帯パターン\n\n時間帯別曜日別\n\n\n\n\n\n\n\n\n\n\n図 2.3: 時間帯別の平均利用数\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n図 2.4: 曜日別の平均利用数",
+    "section": "2.5 プレイ頻度と課金額の関係",
+    "text": "2.5 プレイ頻度と課金額の関係\nプレイ回数と課金額の分布および関連を確認する。課金額には極端に大きい値があるため、散布図では log1p 変換した値も表示する。相関は順位に基づくSpearmanの相関係数を用いる。\n\n\nコード\ncor_data &lt;- main_data[complete.cases(\n  main_data[c(\"SessionCount\", \"InAppPurchaseAmount\")]\n), ]\nplot(cor_data$SessionCount, log1p(cor_data$InAppPurchaseAmount),\n     pch = 16, col = grDevices::adjustcolor(\"#4E79A7\", alpha.f = 0.35),\n     xlab = \"ゲームセッション数（回）\",\n     ylab = \"課金総額 log(1 + USD)\",\n     main = \"プレイ回数と課金総額の関係\")\n\n\n\n\n\n\n\n\n\nコード\ncor.test(cor_data$SessionCount, cor_data$InAppPurchaseAmount,\n         method = \"spearman\", exact = FALSE)\n\n\n\n    Spearman's rank correlation rho\n\ndata:  cor_data$SessionCount and cor_data$InAppPurchaseAmount\nS = 3987583299, p-value = 0.7179\nalternative hypothesis: true rho is not equal to 0\nsample estimates:\n        rho \n0.006725001 \n\n\nセッション数と課金総額の関係を散布図で確認したところ、同じセッション数でも課金総額には大きなばらつきが見られ、両者の明確な傾向は視覚的には確認しにくかった。統計的な関連の有無は、Spearmanの順位相関検定の相関係数とp値に基づいて判断した。\nセッション数と課金総額の関係をSpearmanの順位相関検定で分析した。その結果、統計的に有意な相関は確認されなかった（ρ = 0.0067、p = 0.7179）。散布図でも、セッション数が多いほど課金総額が一貫して増加する傾向は明確ではなかった。したがって、今回のデータでは、セッション数と課金総額の間に明確な単調な関連があるとはいえない。",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
     ]
@@ -163,8 +153,8 @@
     "objectID": "02_データ.html#前処理パイプライン",
     "href": "02_データ.html#前処理パイプライン",
     "title": "2  データ",
-    "section": "2.8 前処理パイプライン",
-    "text": "2.8 前処理パイプライン\n\n\n\n\n\n\nflowchart LR\n    A[元データ取得] --&gt; B[欠損値処理]\n    B --&gt; C[特徴量生成]\n    C --&gt; D[時間帯・曜日&lt;br&gt;ダミー変数化]\n    D --&gt; E[訓練/テスト分割]\n    E --&gt; F[モデル入力]\n\n\n\n\n図 2.5: データ前処理パイプライン",
+    "section": "2.6 前処理パイプライン",
+    "text": "2.6 前処理パイプライン\n本研究では、欠損処理後に SessionCount と InAppPurchaseAmount の下位25%境界をそれぞれ求め、二値指標と4状態の分類に用いる。分析対象の定義に応じて境界値が異なる場合は、第3章・第4章で明記する。\n\n\nコード\nflowchart LR\n  A[KaggleのCSVを読み込む] --&gt; B[列名と欠損値を確認]\n  B --&gt; C[数値・日付・カテゴリ列の型を整える]\n  C --&gt; D[プレイ回数と課金額が有効な行を抽出]\n  D --&gt; E[各指標の下位25%境界を算出]\n  E --&gt; F[低プレイ・低課金の4状態を作成]\n  F --&gt; G[ジャンル別構成と感度分析]\n\n\n\n\n\n\nflowchart LR\n  A[KaggleのCSVを読み込む] --&gt; B[列名と欠損値を確認]\n  B --&gt; C[数値・日付・カテゴリ列の型を整える]\n  C --&gt; D[プレイ回数と課金額が有効な行を抽出]\n  D --&gt; E[各指標の下位25%境界を算出]\n  E --&gt; F[低プレイ・低課金の4状態を作成]\n  F --&gt; G[ジャンル別構成と感度分析]\n\n\n\n\n図 2.1: データ前処理パイプライン",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>データ</span>"
     ]
@@ -174,77 +164,97 @@
     "href": "03_分析手法.html",
     "title": "3  分析手法",
     "section": "",
-    "text": "3.1 手法の選定\n本研究では、以下の2手法を比較する。ベースラインとして線形回帰を用い、非線形な関係を捉える手法として回帰木（rpart）(James ほか 2023年) を採用する。",
+    "text": "3.1 分析方針\n分析は、プレイ回数と課金額を組み合わせた二値指標から始め、属性・ジャンルとの関係を調べた後、両指標の組み合わせを4状態に分けて内訳を検討する流れで進める。(1)指標の定義、(2)主要変数の分布確認、(3)ジャンル別集計、(4)属性を調整したロジスティック回帰を行い、続いて(5)4状態のジャンル比較、(6)年齢差の補助分析、(7)閾値の感度分析を行う。\n研究題目に含まれる「過疎」「サービス終了リスク」の問題意識に対し、このCSVにはゲームごとの利用者数の推移、実際の離脱記録、サービス終了実績は含まれない。したがって、統計分析では「低プレイ・低課金の代理指標」または「低プレイ・低課金状態」と表記し、ゲームの過疎やサービス終了を直接測定したものとは解釈しない。また SessionCount の観測期間はCSVの項目から確認できないため、「週あたりのプレイ回数」とは呼ばない。",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
     ]
   },
   {
-    "objectID": "03_分析手法.html#手法の選定",
-    "href": "03_分析手法.html#手法の選定",
+    "objectID": "03_分析手法.html#csv読込",
+    "href": "03_分析手法.html#csv読込",
     "title": "3  分析手法",
-    "section": "",
-    "text": "表 3.1: 手法の比較\n\n\n\n\n\n\n\n\n\n\n\n手法\n特徴\n利点\n欠点\n\n\n\n\n線形回帰\n線形モデル\n解釈が容易、計算が高速\n非線形関係を捉えにくい\n\n\n回帰木（rpart）\n決定木ベースの再帰分割\n非線形対応、解釈が視覚的\n過学習リスク、不安定性",
+    "section": "3.2 CSV読込",
+    "text": "3.2 CSV読込\n分析に用いる列を読み込み、文字列の空欄を欠損値に統一して、数値列を数値型に変換する。分析ごとに必要な変数が異なるため、対象者数は各分析で明示する。\n\n\nコード\ncsv_path &lt;- \"C:/Users/js201/OneDrive/ドキュメント/2026春/ゼミ2/データセット/mobile_game_inapp_purchases.csv\"\nraw_data &lt;- read.csv(\n  csv_path,\n  check.names = FALSE,\n  stringsAsFactors = FALSE,\n  na.strings = c(\"\", \"NA\")\n)\n\nrequired &lt;- c(\"Age\", \"Country\", \"Device\", \"GameGenre\",\n              \"SessionCount\", \"InAppPurchaseAmount\")\nmissing_columns &lt;- setdiff(required, names(raw_data))\nif (length(missing_columns) &gt; 0) {\n  stop(\"CSVに必要な列がありません: \", paste(missing_columns, collapse = \", \"))\n}\n\nclean_text &lt;- function(x) {\n  x &lt;- trimws(as.character(x))\n  x[x == \"\"] &lt;- NA_character_\n  x\n}\n\nd &lt;- raw_data\ncategorical_columns &lt;- c(\"Country\", \"Device\", \"GameGenre\")\nfor (v in categorical_columns) d[[v]] &lt;- clean_text(d[[v]])\nnumeric_columns &lt;- c(\"Age\", \"SessionCount\", \"InAppPurchaseAmount\")\nfor (v in numeric_columns) {\n  d[[v]] &lt;- suppressWarnings(as.numeric(d[[v]]))\n}\n\ncat(\"CSV全体:\", nrow(d), \"件\\n\")\n\n\nCSV全体: 3024 件\n\n\nコード\ncat(\"分析に使う列:\\n\")\n\n\n分析に使う列:\n\n\nコード\nstr(d[required])\n\n\n'data.frame':   3024 obs. of  6 variables:\n $ Age                : num  49 15 23 31 37 38 20 34 38 46 ...\n $ Country            : chr  \"Norway\" \"Switzerland\" \"China\" \"Mexico\" ...\n $ Device             : chr  \"Android\" \"iOS\" \"Android\" \"Android\" ...\n $ GameGenre          : chr  \"Battle Royale\" \"Action RPG\" \"Fighting\" \"Racing\" ...\n $ SessionCount       : num  9 11 9 12 10 16 9 15 10 18 ...\n $ InAppPurchaseAmount: num  11.4 6.37 15.81 13.49 10.86 ...",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
     ]
   },
   {
-    "objectID": "03_分析手法.html#線形回帰ベースライン",
-    "href": "03_分析手法.html#線形回帰ベースライン",
+    "objectID": "03_分析手法.html#二値指標の分析対象と定義",
+    "href": "03_分析手法.html#二値指標の分析対象と定義",
     "title": "3  分析手法",
-    "section": "3.2 線形回帰（ベースライン）",
-    "text": "3.2 線形回帰（ベースライン）\n線形回帰モデルは、目的変数 \\(y\\) を説明変数 \\(\\mathbf{x} = (x_1, x_2, \\ldots, x_p)\\) の線形結合で表現する。\n\\[\ny = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\cdots + \\beta_p x_p + \\varepsilon\n\\tag{3.1}\\]\nここで \\(\\beta_0\\) は切片、\\(\\beta_1, \\ldots, \\beta_p\\) は回帰係数、\\(\\varepsilon\\) は誤差項である (James ほか 2023年)。",
+    "section": "3.3 二値指標の分析対象と定義",
+    "text": "3.3 二値指標の分析対象と定義\n二値指標による分析では、Age、SessionCount、InAppPurchaseAmount がそろうレコードを用いる。\nこの対象内で両行動指標の第1四分位数を求め、各指標が境界以下なら「低い」とし、両方に該当する場合を1、該当しない場合を0とする。\n連続値・離散値の同値により、「境界以下」の実際の割合は必ずしも25%にならない。\n4状態の分析では年齢を必須にせず、プレイ回数と課金額がそろう全対象を用いるため、標本・境界が異なる。\n\n\nコード\nbase_data &lt;- d[complete.cases(d[c(\"SessionCount\", \"InAppPurchaseAmount\")]), ]\nprior_data &lt;- d[complete.cases(d[c(\"Age\", \"SessionCount\", \"InAppPurchaseAmount\")]), ]\nplay_cutoff &lt;- unname(quantile(prior_data$SessionCount, 0.25, type = 7))\nspend_cutoff &lt;- unname(quantile(prior_data$InAppPurchaseAmount, 0.25, type = 7))\n\nprior_data$low_play &lt;- prior_data$SessionCount &lt;= play_cutoff\nprior_data$low_spend &lt;- prior_data$InAppPurchaseAmount &lt;= spend_cutoff\nprior_data$low_both &lt;- as.integer(prior_data$low_play & prior_data$low_spend)\n\ndata.frame(\n  分析対象 = nrow(prior_data),\n  プレイ回数の第1四分位境界 = play_cutoff,\n  課金額の第1四分位境界 = spend_cutoff,\n  該当者数 = sum(prior_data$low_both == 1),\n  該当割合_percent = mean(prior_data$low_both == 1) * 100\n)\n\n\n\n  \n\n\n\nプレイ回数が8回以下、かつ課金額が約6.01ドル以下の人を「両方低い」と判定する。",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
     ]
   },
   {
-    "objectID": "03_分析手法.html#回帰木rpart",
-    "href": "03_分析手法.html#回帰木rpart",
+    "objectID": "03_分析手法.html#主要変数の分布確認",
+    "href": "03_分析手法.html#主要変数の分布確認",
     "title": "3  分析手法",
-    "section": "3.3 回帰木（rpart）",
-    "text": "3.3 回帰木（rpart）\n回帰木は、説明変数の空間を再帰的に分割し、各領域ごとに目的変数の平均値を予測するノンパラメトリック手法である (James ほか 2023年)。R の rpart パッケージはR に標準搭載されており、追加インストール不要で利用できる。\n\nJames, Gareth, Daniela Witten, Trevor Hastie, Robert Tibshirani, と Jonathan Taylor. 2023年. An Introduction to Statistical Learning: with Applications in R. 2nd 版. Springer. https://doi.org/10.1007/978-3-031-38747-0.\n\n分割の基準\n各ノードにおいて、残差二乗和（RSS）を最小化する分割点を探索する。\n\\[\n\\text{RSS} = \\sum_{x_i \\in R_1} (y_i - \\hat{y}_{R_1})^2 + \\sum_{x_i \\in R_2} (y_i - \\hat{y}_{R_2})^2\n\\tag{3.2}\\]\nここで \\(R_1, R_2\\) は分割後の2つの領域、\\(\\hat{y}_{R_k}\\) は各領域内の目的変数の平均値である。\n\n\n決定木の構造\n\n\n\n\n\n\nflowchart TD\n    A[\"気温 ≥ 20°C ?\"] --&gt;|Yes| B[\"時間帯 ∈ 通勤時間 ?\"]\n    A --&gt;|No| C[\"降雨あり ?\"]\n    B --&gt;|Yes| D[\"予測: 150台\"]\n    B --&gt;|No| E[\"予測: 90台\"]\n    C --&gt;|Yes| F[\"予測: 25台\"]\n    C --&gt;|No| G[\"予測: 55台\"]\n\n\n\n\n図 3.1: 決定木による分岐のイメージ\n\n\n\n\n\n\n\n剪定（Pruning）\n回帰木は深くなるほど訓練データに過学習する。これを防ぐため、コスト複雑度剪定（cost-complexity pruning）を行う。\n\\[\n\\text{Cost} = \\text{RSS} + \\alpha \\cdot |T|\n\\tag{3.3}\\]\nここで \\(|T|\\) は木の終端ノード数、\\(\\alpha\\) は複雑度パラメータ（cp）である。\\(\\alpha\\) が大きいほど単純な木が選ばれる。",
+    "section": "3.4 主要変数の分布確認",
+    "text": "3.4 主要変数の分布確認\n二値指標から4状態へ進む分析の土台として、プレイ回数と課金額の要約統計量および分布を示す。課金額は分布の裾が長い可能性があるため、平均だけでなく中央値と四分位数も確認する。\n\n\nコード\nmake_summary &lt;- function(x, variable_name) {\n  result &lt;- data.frame(\n    変数 = variable_name,\n    有効件数 = length(x),\n    平均 = mean(x),\n    標準偏差 = sd(x),\n    第1四分位数 = unname(quantile(x, 0.25)),\n    中央値 = median(x),\n    第3四分位数 = unname(quantile(x, 0.75)),\n    最小値 = min(x),\n    最大値 = max(x)\n  )\n\n  result[, -1] &lt;- lapply(result[, -1], round, 2)\n  result\n}\n\n# プレイ回数の表\nsession_table &lt;- make_summary(\n  prior_data$SessionCount,\n  \"SessionCount\"\n)\nsession_table\n\n\n\n  \n\n\n\n\n\nコード\nhist(\n  base_data$SessionCount, \n  breaks = \"FD\", \n  col = \"#4E79A7\", \n  border = \"white\",\n  main = \"プレイ回数の分布\", \n  xlab = \"SessionCount（回）\", \n  ylab = \"人数\")\n\n\n\n\n\n\n\n\n\nプレイ回数は、中央値が10回で、第1四分位数が8回、第3四分位数が12回。中央の半数のユーザーはおおむね8∼12回の範囲にいる。\n\n\nコード\n# 課金額の表\nspending_table &lt;- make_summary(\n  prior_data$InAppPurchaseAmount,\n  \"InAppPurchaseAmount\"\n)\nspending_table\n\n\n\n  \n\n\n\n\n\nコード\nd &lt;- read.csv(\n  \"C:/Users/js201/OneDrive/ドキュメント/2026春/ゼミ2/データセット/mobile_game_inapp_purchases.csv\",\n  na.strings = c(\"\", \"NA\")\n)\n\nx &lt;- as.numeric(d$InAppPurchaseAmount)\nx &lt;- x[is.finite(x)]\n\ncat(\"有効件数:\", length(x), \"\\n\")\n\n\n有効件数: 2888 \n\n\nコード\ncat(\"範囲:\", range(x), \"\\n\")\n\n\n範囲: 0 4964.45 \n\n\nコード\nhist(\n  log1p(x),\n  breaks = 30,\n  col = \"#F28E2B\",\n  border = \"white\",\n  main = \"課金額の分布（対数変換）\",\n  xlab = \"log(1 + 課金額［USD］)\",\n  ylab = \"人数\"\n)\n\n\n\n\n\n\n\n\n\n課金額は、中央値が11.99ドルなのに対し、平均が103.76ドル。最大値も4,964.45ドルと大きく、少数の高額課金が平均を押し上げている、偏りの大きい分布だと考えられる。そのため、課金額は平均だけではなく中央値や四分位数も併せてみる必要がある。 ＊グラフは対数変換されている。",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
     ]
   },
   {
-    "objectID": "03_分析手法.html#説明変数の設計",
-    "href": "03_分析手法.html#説明変数の設計",
+    "objectID": "03_分析手法.html#ジャンル別の単純集計",
+    "href": "03_分析手法.html#ジャンル別の単純集計",
     "title": "3  分析手法",
-    "section": "3.4 説明変数の設計",
-    "text": "3.4 説明変数の設計\n\n\n\n表 3.2: 説明変数一覧\n\n\n\n\n\n変数名\n型\n説明\n変換\n\n\n\n\nhour\ninteger\n時間帯\nそのまま使用\n\n\ntemperature\nnumeric\n気温\nそのまま使用\n\n\nhumidity\nnumeric\n湿度\nそのまま使用\n\n\nwind_speed\nnumeric\n風速\nそのまま使用\n\n\nis_rain\ninteger\n降雨フラグ\nfactor 変換\n\n\nis_weekend\nlogical\n休日フラグ\nfactor 変換\n\n\nmonth\ninteger\n月\nfactor 変換",
+    "section": "3.5 ジャンル別の単純集計",
+    "text": "3.5 ジャンル別の単純集計\n二値指標（両方低い／それ以外）を用い、ゲームジャンルごとの人数と該当割合を算出する。割合だけでは少数ジャンルが目立つ場合があるため、分母となる人数も併記する。これは記述的な比較であり、ジャンルの因果効果を推定するものではない。\n\n\nコード\ngenre_data &lt;- prior_data[!is.na(prior_data$GameGenre), ]\ngenre_split &lt;- split(genre_data, genre_data$GameGenre)\ngenre_summary &lt;- do.call(rbind, lapply(names(genre_split), function(g) {\n  x &lt;- genre_split[[g]]\n  n &lt;- nrow(x)\n  k &lt;- sum(x$low_both == 1)\n  ci &lt;- if (n &gt; 0) binom.test(k, n)$conf.int else c(NA_real_, NA_real_)\n  data.frame(\n    GameGenre = g,\n    人数 = n,\n    該当者数 = k,\n    該当割合_percent = 100 * k / n,\n    CI95下限_percent = 100 * ci[1],\n    CI95上限_percent = 100 * ci[2]\n  )\n}))\ngenre_summary &lt;- genre_summary[order(-genre_summary$該当割合_percent), ]\ngenre_summary[, -1] &lt;- lapply(genre_summary[, -1], round, 2)\nrownames(genre_summary) &lt;- NULL\ngenre_summary\n\n\n\n  \n\n\n\n\n\nコード\nplot_data &lt;- genre_summary[order(genre_summary$該当割合_percent), ]\npar(mar = c(5, 10, 4, 2))\nbarplot(plot_data$該当割合_percent, names.arg = plot_data$GameGenre,\n        horiz = TRUE, las = 1, col = \"#4E79A7\",\n        xlab = \"低プレイ・低課金ユーザーの割合（%）\",\n        main = \"ジャンル別の低プレイ・低課金割合\")\n\n\n\n\n\n\n\n\n\nコード\npar(mar = c(5, 4, 4, 2))\n\n\n割合はSandboxが9.80%で最も高く、Sportsが9.66%。Cardは4.23%で最も低くなっている。",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
     ]
   },
   {
-    "objectID": "03_分析手法.html#分析パイプライン",
-    "href": "03_分析手法.html#分析パイプライン",
+    "objectID": "03_分析手法.html#属性を調整したロジスティック回帰",
+    "href": "03_分析手法.html#属性を調整したロジスティック回帰",
     "title": "3  分析手法",
-    "section": "3.5 分析パイプライン",
-    "text": "3.5 分析パイプライン\n\n\n\n\n\n\nflowchart LR\n    A[データ読込] --&gt; B[前処理&lt;br&gt;factor変換]\n    B --&gt; C[訓練/テスト分割&lt;br&gt;80:20]\n    C --&gt; D[モデル学習]\n    D --&gt; E1[線形回帰&lt;br&gt;lm]\n    D --&gt; E2[回帰木&lt;br&gt;rpart]\n    E1 --&gt; F[精度評価&lt;br&gt;MAE/RMSE/R²]\n    E2 --&gt; F\n    F --&gt; G[変数重要度&lt;br&gt;分析]\n\n\n\n\n図 3.2: 分析パイプライン",
+    "section": "3.6 属性を調整したロジスティック回帰",
+    "text": "3.6 属性を調整したロジスティック回帰\n目的変数はプレイ回数と課金額から作る二値代理指標である。\n年齢・国・端末・ジャンルを説明変数として、各属性と該当状態との関連を同時に推定する。\n目的変数作成に使う行と、説明変数の欠損を除いた回帰標本は異なるため、回帰に用いた標本数と該当者数を報告する。\nカテゴリ変数の係数はそれぞれ基準カテゴリとの比較であり、変数全体の検定結果も確認する。\n\n\nコード\nmodel_columns &lt;- c(\"low_both\", \"Age\", \"Country\", \"Device\", \"GameGenre\")\nmodel_data &lt;- prior_data[\n  complete.cases(prior_data[model_columns]) &\n    !is.na(prior_data$Country) & !is.na(prior_data$Device) &\n    !is.na(prior_data$GameGenre),\n]\n\nmodel_data$Country &lt;- droplevels(factor(model_data$Country))\nmodel_data$Device &lt;- droplevels(factor(model_data$Device))\nmodel_data$GameGenre &lt;- droplevels(factor(model_data$GameGenre))\n\ncat(\"回帰標本:\", nrow(model_data), \"件\\n\")\n\n\n回帰標本: 2667 件\n\n\nコード\ncat(\"該当者:\", sum(model_data$low_both == 1), \"人\\n\")\n\n\n該当者: 204 人\n\n\nコード\ncat(\"非該当者:\", sum(model_data$low_both == 0), \"人\\n\")\n\n\n非該当者: 2463 人\n\n\nコード\nlogit_model &lt;- glm(\n  low_both ~ Age + Country + Device + GameGenre,\n  data = model_data,\n  family = binomial(link = \"logit\")\n)\nsummary(logit_model)\n\n\n\nCall:\nglm(formula = low_both ~ Age + Country + Device + GameGenre, \n    family = binomial(link = \"logit\"), data = model_data)\n\nCoefficients:\n                         Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)            -2.2899557  0.5117746  -4.475 7.66e-06 ***\nAge                     0.0009323  0.0061462   0.152    0.879    \nCountryAustralia       -0.1175860  0.5264048  -0.223    0.823    \nCountryBangladesh      -0.2480927  0.5430965  -0.457    0.648    \nCountryBrazil          -0.3708817  0.5646857  -0.657    0.511    \nCountryCanada          -0.7416280  0.6361334  -1.166    0.244    \nCountryChina            0.4669768  0.4880409   0.957    0.339    \nCountryDenmark          0.0483159  0.5137279   0.094    0.925    \nCountryEgypt            0.3115810  0.4938423   0.631    0.528    \nCountryFrance           0.3384595  0.5043362   0.671    0.502    \nCountryGermany          0.2881337  0.4850736   0.594    0.553    \nCountryIndia           -0.1396408  0.4476551  -0.312    0.755    \nCountryIran             0.0191049  0.5126250   0.037    0.970    \nCountryItaly           -0.2729703  0.5428645  -0.503    0.615    \nCountryJapan           -0.3045195  0.5417188  -0.562    0.574    \nCountryMexico          -0.8576379  0.6338683  -1.353    0.176    \nCountryNetherlands     -0.8516727  0.6330903  -1.345    0.179    \nCountryNorway          -0.6428624  0.5932210  -1.084    0.279    \nCountryRussia          -0.6508596  0.6355440  -1.024    0.306    \nCountrySaudi Arabia    -0.9786600  0.6331121  -1.546    0.122    \nCountrySouth Korea     -0.5759207  0.5934663  -0.970    0.332    \nCountrySpain            0.2477420  0.5040187   0.492    0.623    \nCountrySri Lanka        0.2455859  0.5170316   0.475    0.635    \nCountrySweden          -0.8022252  0.6343912  -1.265    0.206    \nCountrySwitzerland     -0.0010117  0.5010850  -0.002    0.998    \nCountryTurkey          -0.6052620  0.6372312  -0.950    0.342    \nCountryUK              -0.3144680  0.5418936  -0.580    0.562    \nCountryUSA             -0.3053011  0.5651101  -0.540    0.589    \nDeviceiOS               0.0187875  0.1508747   0.125    0.901    \nGameGenreAdventure      0.1332538  0.3992959   0.334    0.739    \nGameGenreBattle Royale -0.1639530  0.4229853  -0.388    0.698    \nGameGenreCard          -0.6420685  0.4603850  -1.395    0.163    \nGameGenreCasual        -0.2320752  0.4116757  -0.564    0.573    \nGameGenreFighting      -0.0666078  0.4046664  -0.165    0.869    \nGameGenreMMORPG         0.2108583  0.3826181   0.551    0.582    \nGameGenreMOBA          -0.5362842  0.4611178  -1.163    0.245    \nGameGenrePuzzle        -0.4789984  0.4453959  -1.075    0.282    \nGameGenreRacing        -0.1618104  0.4134277  -0.391    0.696    \nGameGenreRole Playing   0.2353522  0.3824177   0.615    0.538    \nGameGenreSandbox        0.1740046  0.3726262   0.467    0.641    \nGameGenreSimulation     0.1449773  0.3764753   0.385    0.700    \nGameGenreSports         0.2150631  0.3692756   0.582    0.560    \nGameGenreStrategy      -0.2009578  0.4128890  -0.487    0.626    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 1440.8  on 2666  degrees of freedom\nResidual deviance: 1398.9  on 2624  degrees of freedom\nAIC: 1484.9\n\nNumber of Fisher Scoring iterations: 5\n\n\n係数はオッズ比に変換し、95% Wald信頼区間とp値を示す。\n\n\nコード\ncoef_mat &lt;- coef(summary(logit_model))\nor_table &lt;- data.frame(\n  変数 = rownames(coef_mat),\n  係数 = coef_mat[, \"Estimate\"],\n  標準誤差 = coef_mat[, \"Std. Error\"],\n  オッズ比 = exp(coef_mat[, \"Estimate\"]),\n  CI95下限 = exp(coef_mat[, \"Estimate\"] - 1.96 * coef_mat[, \"Std. Error\"]),\n  CI95上限 = exp(coef_mat[, \"Estimate\"] + 1.96 * coef_mat[, \"Std. Error\"]),\n  p値 = coef_mat[, \"Pr(&gt;|z|)\"],\n  row.names = NULL\n)\nor_table[, -1] &lt;- lapply(or_table[, -1], round, 4)\nor_table\n\n\n\n  \n\n\n\n\n\nコード\n# 各カテゴリ変数を全体として評価する尤度比検定\ndrop1(logit_model, test = \"Chisq\")\n\n\n\n  \n\n\n\nコード\ndata.frame(\n  回帰標本数 = nobs(logit_model),\n  該当者数 = sum(model_data$low_both == 1),\n  非該当者数 = sum(model_data$low_both == 0),\n  AIC = AIC(logit_model),\n  null_deviance = logit_model$null.deviance,\n  residual_deviance = logit_model$deviance\n)\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n項目\n出力の場所\n数値\n読み取り方\n\n\n\n\n回帰分析の対象人数\n回帰標本数\n2,667人\n年齢・国・端末・ジャンルなど、モデルに使う情報がそろった人数\n\n\n回帰分析での該当者数\n該当者数\n204人\n回帰標本のうち、低プレイ・低課金の両方に該当した人数\n\n\n年齢のオッズ比\nor_table のAge行「オッズ比」\n1.0009\n年齢が1歳上がったとき、該当するオッズがわずかに高くなる推定。ただし、ほぼ1に近い\n\n\n年齢の95%信頼区間\nor_table のAge行「CI95下限～CI95上限」\n0.9889～1.0131\n1を含んでいる\n\n\n年齢との個別の関連\nsummary(logit_model) のAge行 Pr(&gt;\\|z\\|)\np = 0.879\n5%水準を上回り、年齢との個別の関連は確認できない\n\n\n年齢との全体的な関連\ndrop1() のAge行 Pr(&gt;Chi)\np = 0.8794\n年齢をモデルから除いても、適合度に明確な変化は確認できない\n\n\n国全体との関連\ndrop1() のCountry行 Pr(&gt;Chi)\np = 0.3221\n国全体としての明確な関連は確認できない\n\n\n端末全体との関連\ndrop1() のDevice行 Pr(&gt;Chi)\np = 0.9009\n端末全体としての明確な関連は確認できない\n\n\nジャンル全体との関連\ndrop1() のGameGenre行 Pr(&gt;Chi)\np = 0.5337\nジャンル全体としての明確な関連は確認できない\n\n\n\n回帰分析の対象は2,667人で、そのうち低プレイ・低課金の両方に該当した人は204人だった。 年齢のオッズ比は1.0009、95%信頼区間は0.9889∼1.0131で、信頼区間は1を含んでいる。 年齢のp値も個別の係数検定で0.879、変数全体の検定で0.8794となり、年齢との明確な関連は確認できなかった。\n国・端末・ジャンルについても、変数全体の検定結果はそれぞれp = 0.3221、p = 0.9009、p = 0.5337で、いずれも5%水準を上回っている。 したがって、この分析では、年齢・国・端末・ジャンルと低プレイ・低課金の代理指標との明確な関連は確認できなかった。",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
     ]
   },
   {
-    "objectID": "03_分析手法.html#精度評価指標",
-    "href": "03_分析手法.html#精度評価指標",
+    "objectID": "03_分析手法.html#状態の定義",
+    "href": "03_分析手法.html#状態の定義",
     "title": "3  分析手法",
-    "section": "3.6 精度評価指標",
-    "text": "3.6 精度評価指標\nモデルの予測精度を評価するため、以下の3指標を使用する。\n\n平均絶対誤差（MAE）\n\\[\n\\text{MAE} = \\frac{1}{n} \\sum_{i=1}^{n} |y_i - \\hat{y}_i|\n\\tag{3.4}\\]\n\n\n二乗平均平方根誤差（RMSE）\n\\[\n\\text{RMSE} = \\sqrt{\\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2}\n\\tag{3.5}\\]\n\n\n決定係数（R²）\n\\[\nR^2 = 1 - \\frac{\\sum_{i=1}^{n}(y_i - \\hat{y}_i)^2}{\\sum_{i=1}^{n}(y_i - \\bar{y})^2}\n\\tag{3.6}\\]\nここで \\(y_i\\) は実測値、\\(\\hat{y}_i\\) は予測値、\\(\\bar{y}\\) は実測値の平均、\\(n\\) はサンプル数である。\n式 3.4 は外れ値に頑健な指標、式 3.5 は大きな誤差をより重く評価する指標、式 3.6 はモデルの説明力を0〜1で表す指標である。",
+    "section": "3.7 4状態の定義",
+    "text": "3.7 4状態の定義\n二値指標で捉えた状態をさらに詳しく見るため、年齢を必須とせず、プレイ回数と課金額がそろう対象を用いて、それぞれの第1四分位数を計算する。 プレイ回数と課金額の低さを別々に扱い、二つの二値指標の組み合わせから4状態を作る。同じ境界値を含むユーザーは「低い」側に分類する。\n\n\n\n状態\nプレイ回数\n課金額\n\n\n\n\n低プレイのみ\n低い\n低くない\n\n\n低課金のみ\n低くない\n低い\n\n\n低プレイ・低課金の両方\n低い\n低い\n\n\nどちらも低くない\n低くない\n低くない\n\n\n\n\n\nコード\nplay_cutoff_4state &lt;- unname(quantile(base_data$SessionCount, 0.25, type = 7))\nspend_cutoff_4state &lt;- unname(quantile(base_data$InAppPurchaseAmount, 0.25, type = 7))\nbase_data$low_play &lt;- base_data$SessionCount &lt;= play_cutoff_4state\nbase_data$low_spend &lt;- base_data$InAppPurchaseAmount &lt;= spend_cutoff_4state\nbase_data$state &lt;- with(base_data, ifelse(\n  low_play & low_spend, \"低プレイ・低課金の両方\",\n  ifelse(low_play, \"低プレイのみ\",\n         ifelse(low_spend, \"低課金のみ\", \"どちらも低くない\"))\n))\nbase_data$state &lt;- factor(\n  base_data$state,\n  levels = c(\"低プレイのみ\", \"低課金のみ\", \"低プレイ・低課金の両方\", \"どちらも低くない\")\n)\nstate_counts &lt;- table(base_data$state)\ndata.frame(状態 = names(state_counts), 人数 = as.integer(state_counts),\n           割合_percent = round(100 * prop.table(state_counts), 2))\n\n\n\n  \n\n\n\n最も多いのは「どちらも低くない」人で、全体の51.00%だった。 一方、低プレイのみは24.00%、低課金のみは17.49%だった。 この分類から、プレイ回数の少なさと課金額の少なさは、同じ状況としてまとめずに分けてみる必要があることが分かる。\n## ジャンルとの関連\nジャンルと4状態のクロス集計を行い、ジャンル内の構成割合を示す。 Pearsonのカイ二乗統計量とモンテカルロ法によるp値を併記し、カテゴリの期待度数が小さい場合にも漸近近似だけに依存しないようにする。\n検定は分布全体の関連を評価するもので、特定ジャンルの因果効果を示すものではない。\n\n\nコード\ngenre_state_data &lt;- base_data[!is.na(base_data$GameGenre), ]\ngenre_state &lt;- table(genre_state_data$GameGenre, genre_state_data$state)\ngenre_state\n\n\n               \n                低プレイのみ 低課金のみ 低プレイ・低課金の両方 どちらも低くない\n  Action RPG              43         34                     16               91\n  Adventure               37         32                     14               79\n  Battle Royale           42         30                     13               94\n  Card                    42         39                      8              106\n  Casual                  52         29                     12              109\n  Fighting                46         26                     13               87\n  MMORPG                  40         35                     18               95\n  MOBA                    48         29                      8               88\n  Puzzle                  45         35                      9              106\n  Racing                  58         26                     12               86\n  Role Playing            33         41                     17               92\n  Sandbox                 50         40                     20               97\n  Simulation              50         25                     18              117\n  Sports                  54         39                     21               96\n  Strategy                38         37                     13              101\n\n\nコード\nround(100 * prop.table(genre_state, margin = 1), 1)\n\n\n               \n                低プレイのみ 低課金のみ 低プレイ・低課金の両方 どちらも低くない\n  Action RPG            23.4       18.5                    8.7             49.5\n  Adventure             22.8       19.8                    8.6             48.8\n  Battle Royale         23.5       16.8                    7.3             52.5\n  Card                  21.5       20.0                    4.1             54.4\n  Casual                25.7       14.4                    5.9             54.0\n  Fighting              26.7       15.1                    7.6             50.6\n  MMORPG                21.3       18.6                    9.6             50.5\n  MOBA                  27.7       16.8                    4.6             50.9\n  Puzzle                23.1       17.9                    4.6             54.4\n  Racing                31.9       14.3                    6.6             47.3\n  Role Playing          18.0       22.4                    9.3             50.3\n  Sandbox               24.2       19.3                    9.7             46.9\n  Simulation            23.8       11.9                    8.6             55.7\n  Sports                25.7       18.6                   10.0             45.7\n  Strategy              20.1       19.6                    6.9             53.4\n\n\nコード\nset.seed(20261013)\nchisq.test(genre_state, simulate.p.value = TRUE, B = 10000)\n\n\n\n    Pearson's Chi-squared test with simulated p-value (based on 10000\n    replicates)\n\ndata:  genre_state\nX-squared = 42.478, df = NA, p-value = 0.4556\n\n\nジャンルと4つのユーザー状態の関連を検定した結果、統計的に明確な関連は確認されなかった（χ² = 42.478、モンテカルロ法による p = 0.4556）。p値は一般的な5%水準を上回っている。\n割合を記述的に見ると、「低プレイ・低課金の両方」の割合はSportsで10.0%、Sandboxで9.7%と高く、Cardで4.1%、MOBAとPuzzleで4.6%と低くなっている。\nただし、全体の検定では有意な関連が確認されていないため、これらのジャンル間の差を統計的に明確な差として結論づけることはできない。\nシミュレーションによるカイ二乗検定の結果、ジャンルとユーザー状態の間に統計的に有意な関連は確認されなかった（χ² = 42.478、p = 0.4556）。\n「低プレイ・低課金の両方」に該当する割合はジャンルごとに異なって見られたが、全体の検定結果からは、ジャンルによる明確な構成差があるとはいえない。",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
     ]
   },
   {
-    "objectID": "03_分析手法.html#追加パッケージの利用発展",
-    "href": "03_分析手法.html#追加パッケージの利用発展",
+    "objectID": "03_分析手法.html#年齢差の補助分析",
+    "href": "03_分析手法.html#年齢差の補助分析",
     "title": "3  分析手法",
-    "section": "3.7 追加パッケージの利用（発展）",
-    "text": "3.7 追加パッケージの利用（発展）\n本テンプレートはR の基本パッケージのみで動作するが、研究の目的に応じてより高度なパッケージを導入できる。\n\n\n\n\n\n\n重要パッケージの追加手順\n\n\n\n\nR コンソールで install.packages(\"パッケージ名\") を実行（初回のみ）\n.qmd ファイルのコードブロック内で library(パッケージ名) を記述\nquarto render で正常にビルドできることを確認\n\n\n\n\n代表的な追加パッケージ\n\n\n\n\n\n\n\n\nパッケージ\n用途\nインストール\n\n\n\n\ntidyverse\nデータ操作・可視化の統合環境\ninstall.packages(\"tidyverse\")\n\n\nrandomForest\nランダムフォレスト\ninstall.packages(\"randomForest\")\n\n\nlightgbm\n勾配ブースティング（LightGBM）\ninstall.packages(\"lightgbm\")\n\n\nplotly\nインタラクティブなグラフ\ninstall.packages(\"plotly\")\n\n\n\n\n\n使用例：LightGBM で回帰木を置き換える場合\n# 1. インストール（R コンソールで一度だけ実行）\ninstall.packages(\"lightgbm\")\n\n# 2. .qmd ファイル内で読み込んで使用\nlibrary(lightgbm)\n\ndtrain &lt;- lgb.Dataset(\n  data  = as.matrix(train_data[, -which(names(train_data) == \"count\")]),\n  label = train_data$count\n)\n\nparams &lt;- list(objective = \"regression\", metric = \"rmse\",\n               num_leaves = 31, learning_rate = 0.1)\n\nlgbm_fit &lt;- lgb.train(params, dtrain, nrounds = 500)\n\n\n\n\n\n\n警告注意\n\n\n\n\n追加パッケージを使う場合、quarto render 時にそのパッケージがインストール済みである必要がある\nエラーが出たら、まず install.packages(\"パッケージ名\") を実行してから再度 quarto render する\nGitHub Pages にデプロイする際、ビルドは自分の PC 上で行われるため、自分の PC にパッケージがあれば問題ない",
+    "section": "3.8 年齢差の補助分析",
+    "text": "3.8 年齢差の補助分析\n年齢が利用できる対象者について4状態間の年齢分布を比較する。年齢の正規性を前提にしないKruskal–Wallis検定を補助的に用い、各群の人数・中央値も併記する。探索的分析として解釈する。\n\n\nコード\nage_data &lt;- base_data[!is.na(base_data$Age), ]\nage_summary &lt;- do.call(rbind, lapply(split(age_data$Age, age_data$state), function(x) {\n  data.frame(人数 = length(x), 中央値 = median(x), 第1四分位数 = quantile(x, .25),\n             第3四分位数 = quantile(x, .75))\n}))\nage_summary$状態 &lt;- rownames(age_summary)\nrownames(age_summary) &lt;- NULL\nage_summary[, c(\"状態\", \"人数\", \"中央値\", \"第1四分位数\", \"第3四分位数\")]\n\n\n\n  \n\n\n\nコード\nkruskal.test(Age ~ state, data = age_data)\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Age by state\nKruskal-Wallis chi-squared = 1.9374, df = 3, p-value = 0.5855\n\n\n年齢が欠損していない2,835人を、4つの状態に分けて比較した結果。\n状態間に統計的に有意な差は確認されなかった（χ²(3) = 1.9374、p = 0.5855）。\n各状態の年齢中央値は32～34歳であり、今回のデータでは、年齢分布がユーザー状態によって明確に異なるとはいえない。",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
+    ]
+  },
+  {
+    "objectID": "03_分析手法.html#閾値の感度分析",
+    "href": "03_分析手法.html#閾値の感度分析",
+    "title": "3  分析手法",
+    "section": "3.9 閾値の感度分析",
+    "text": "3.9 閾値の感度分析\n「低い」の定義を下位20%、25%、30%に変え、両方が低いユーザーの人数と割合を比較する。プレイ回数は離散的なため、分位点境界以下に含まれる人数の割合が指定した割合と一致しない場合がある。境界値・該当人数・分析対象数をあわせて示す。\n\n\nコード\nsensitivity &lt;- do.call(rbind, lapply(c(.20, .25, .30), function(p) {\n  cp &lt;- unname(quantile(base_data$SessionCount, p, type = 7))\n  ca &lt;- unname(quantile(base_data$InAppPurchaseAmount, p, type = 7))\n  both &lt;- base_data$SessionCount &lt;= cp & base_data$InAppPurchaseAmount &lt;= ca\n  data.frame(\n    分位点_percent = 100 * p,\n    プレイ回数境界 = cp,\n    課金額境界 = ca,\n    両方低い人数 = sum(both),\n    分析対象数 = length(both),\n    両方低い割合_percent = 100 * mean(both)\n  )\n}))\nsensitivity\n\n\n\n  \n\n\n\n低プレイ・低課金の判定基準による結果の変化を確認するため、下位20%、25%、30%を基準とした感度分析を行った。\nその結果、両方に該当するユーザーは、下位20%基準で112人（3.88%）、25%基準で217人（7.51%）、30%基準で276人（9.56%）であった。判定基準を広げると該当者の割合も増加したため、該当者数や割合は、低プレイ・低課金とする境界の設定に左右される。したがって、7.51%という割合は、下位25%を基準とした場合の結果として解釈する必要がある。",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
+    ]
+  },
+  {
+    "objectID": "03_分析手法.html#まとめ",
+    "href": "03_分析手法.html#まとめ",
+    "title": "3  分析手法",
+    "section": "3.10 まとめ",
+    "text": "3.10 まとめ\n\n分析手法\n\n分析対象の設定\n\n各分析に必要な変数がそろっている利用者を対象とした。\n必要な変数が分析ごとに異なるため、分析によって対象者数は異なる。\n\n低プレイ・低課金の基準設定\n\nプレイ回数とアプリ内課金額の第1四分位数を、それぞれの判定基準とした。\n各基準以下の利用者を「低プレイ」「低課金」と判定した。\n\n変数の分布と該当割合の確認\n\nプレイ回数と課金額の要約統計量や分布を確認した。\n低プレイと低課金の両方に該当する利用者の人数と割合を算出した。\n\n属性との関連分析\n\n年齢・国・端末・ゲームジャンルと、低プレイ・低課金の代理指標との関連をロジスティック回帰分析で検討した。\n国・端末・ゲームジャンルについては、尤度比検定を用いて変数全体としての関連も評価した。\n\n4状態の分類と比較\n\n利用者を「低プレイのみ」「低課金のみ」「低プレイ・低課金の両方」「どちらも低くない」の4状態に分類した。\nゲームジャンルごとの状態構成をクロス集計し、シミュレーションによるカイ二乗検定で関連を検討した。\nKruskal–Wallis検定を用いて、4状態間の年齢分布を比較した。\n\n判定基準の感度分析\n\n判定基準を下位20%、25%、30%に変え、低プレイ・低課金の両方に該当する人数と割合を比較した。\n\n指標の解釈\n\n低プレイ・低課金は利用者行動の代理指標として扱った。\n実際のゲーム離脱やサービス終了を直接測定する分析ではない。",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>分析手法</span>"
     ]
@@ -254,57 +264,47 @@
     "href": "04_結果と考察.html",
     "title": "4  結果と考察",
     "section": "",
-    "text": "4.1 モデル学習\n第2章と同一のデータを読み込み、訓練データ（80%）とテストデータ（20%）に分割した。線形回帰（lm）と回帰木（rpart）の2モデルを学習させた。",
+    "text": "4.1 分析対象と4状態の構成\n本研究では、まずプレイ回数と課金額の両方が低いユーザーを二値指標で捉え、属性との関係を調べた。そのうえで、二つの指標の組み合わせを4状態に分け、ユーザー構成を詳しく見た。二値指標の分析では年齢・プレイ回数・課金額がそろう2,835人を用い、プレイ回数の第1四分位境界は8回、課金額の境界は約6.01、両方が境界以下のユーザーは216人（7.62%）だった。\n属性を含むロジスティック回帰では、国・端末・ジャンルの欠損を含む行を除いた2,667人が対象となり、二値指標の該当者は204人だった。これは、分析に必要な変数が揃う対象者が分析段階ごとに異なるためである。\n4状態分析では年齢を必須にせず、プレイ回数と課金額が揃う2,888人を対象にした。境界はプレイ回数8回、課金額約5.99であった。対象者と境界が二値指標の分析と異なるため、該当者数にも差が出る。4状態の構成は次の通りである。\n以下のコードは、提出時に使うCSVから4状態の境界と件数を再計算する。\nコード\ncsv_path &lt;- \"C:/Users/js201/OneDrive/ドキュメント/2026春/ゼミ2/データセット/mobile_game_inapp_purchases.csv\"\nd &lt;- read.csv(csv_path, check.names = FALSE, stringsAsFactors = FALSE,\n              na.strings = c(\"\", \"NA\"))\nd$SessionCount &lt;- suppressWarnings(as.numeric(d$SessionCount))\nd$InAppPurchaseAmount &lt;- suppressWarnings(as.numeric(d$InAppPurchaseAmount))\nd$Age &lt;- suppressWarnings(as.numeric(d$Age))\nd$GameGenre &lt;- trimws(as.character(d$GameGenre))\nd$GameGenre[d$GameGenre == \"\"] &lt;- NA_character_\nd &lt;- d[complete.cases(d[c(\"SessionCount\", \"InAppPurchaseAmount\")]), ]\n\ncs &lt;- unname(quantile(d$SessionCount, .25, type = 7))\nca &lt;- unname(quantile(d$InAppPurchaseAmount, .25, type = 7))\nd$low_play &lt;- d$SessionCount &lt;= cs\nd$low_spend &lt;- d$InAppPurchaseAmount &lt;= ca\nd$state &lt;- with(d, ifelse(\n  low_play & low_spend, \"低プレイ・低課金の両方\",\n  ifelse(low_play, \"低プレイのみ\",\n         ifelse(low_spend, \"低課金のみ\", \"どちらも低くない\"))\n))\nd$state &lt;- factor(\n  d$state,\n  levels = c(\"低プレイのみ\", \"低課金のみ\",\n             \"低プレイ・低課金の両方\", \"どちらも低くない\")\n)\n\ncat(\"4状態分析の対象 N =\", nrow(d), \"\\n\")\n\n\n4状態分析の対象 N = 2888 \n\n\nコード\ncat(\"プレイ回数の境界 =\", cs, \"\\n\")\n\n\nプレイ回数の境界 = 8 \n\n\nコード\ncat(\"課金額の境界 =\", ca, \"\\n\")\n\n\n課金額の境界 = 5.9875 \n\n\nコード\ncounts &lt;- table(d$state)\ndata.frame(\n  状態 = names(counts),\n  人数 = as.integer(counts),\n  割合_percent = round(100 * prop.table(counts), 2)\n)\nプレイ回数と課金額の両方が得られた2,888人を対象に、それぞれの第1四分位数を基準として利用者を4状態に分類した。 プレイ回数の境界は8回、課金額の境界は5.9875であった。 「低プレイのみ」は693人（24.00%）、「低課金のみ」は505人（17.49%）、「低プレイ・低課金の両方」は217人（7.51%）、「どちらも低くない」は1,473人（51.00%）であった。",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>結果と考察</span>"
     ]
   },
   {
-    "objectID": "04_結果と考察.html#精度比較",
-    "href": "04_結果と考察.html#精度比較",
+    "objectID": "04_結果と考察.html#分析対象と4状態の構成",
+    "href": "04_結果と考察.html#分析対象と4状態の構成",
     "title": "4  結果と考察",
-    "section": "4.2 精度比較",
-    "text": "4.2 精度比較\n表 4.1 に各モデルのテストデータに対する精度評価結果を示す。\n\n\n\n\n表 4.1: モデル精度の比較\n\n\n\n\n\n\nモデル\nMAE\nRMSE\nR²\n\n\n\n\n線形回帰\n39.59\n48.94\n0.19\n\n\n回帰木（rpart）\n18.46\n23.25\n0.82\n\n\n\n\n\n\n\n\n回帰木は全ての指標で線形回帰を上回っており、非線形な利用パターンの捕捉に有効であることが示された。",
+    "section": "",
+    "text": "状態\n人数\n割合\n\n\n\n\n低プレイのみ\n693人\n24.00%\n\n\n低課金のみ\n505人\n17.49%\n\n\n低プレイ・低課金の両方\n217人\n7.51%\n\n\nどちらも低くない\n1,473人\n51.04%\n\n\n合計\n2,888人\n100.00%",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>結果と考察</span>"
     ]
   },
   {
-    "objectID": "04_結果と考察.html#予測結果の可視化",
-    "href": "04_結果と考察.html#予測結果の可視化",
+    "objectID": "04_結果と考察.html#ジャンル別の状態構成",
+    "href": "04_結果と考察.html#ジャンル別の状態構成",
     "title": "4  結果と考察",
-    "section": "4.3 予測結果の可視化",
-    "text": "4.3 予測結果の可視化\n図 4.1 にテストデータの先頭200件における実測値と予測値の比較を示す。\n\n\n\n\n\n\n\n\n図 4.1: 実測値と予測値の比較（テストデータ先頭200件）",
+    "section": "4.2 ジャンル別の状態構成",
+    "text": "4.2 ジャンル別の状態構成\n\n\nコード\ngenre_state &lt;- table(d$GameGenre, d$state, useNA = \"no\")\ngenre_prop &lt;- prop.table(genre_state, margin = 1)\n\npar(mar = c(8, 11, 4, 2), xpd = NA)\n\nbarplot(\n  t(genre_prop),\n  names.arg = colnames(t(genre_prop)),\n  horiz = TRUE,\n  las = 1,\n  axes = FALSE,\n  xlim = c(0, 1),\n  cex.names = 0.8,\n  col = c(\"#4E79A7\", \"#F28E2B\", \"#E15759\", \"#59A14F\"),\n  xlab = \"ジャンル内の割合\",\n  main = \"ゲームジャンル別・ユーザー状態の構成\"\n)\n\naxis(1, at = seq(0, 1, 0.2), labels = sprintf(\"%.1f\", seq(0, 1, 0.2)))\n\nlegend(\n  \"bottom\",\n  inset = c(0, -0.48),\n  xpd = NA,\n  ncol = 2,\n  bty = \"n\",\n  fill = c(\"#4E79A7\", \"#F28E2B\", \"#E15759\", \"#59A14F\"),\n  legend = levels(d$state),\n  cex = 0.8\n)\n\n\n\n\n\n\n\n\n\nコード\npar(xpd = FALSE)\n\n\n二値指標を用いてジャンル別割合を記述すると、ジャンルごとに割合の違いが見られた。ただし、年齢・国・端末を調整したロジスティック回帰では、ジャンル全体の尤度比検定は有意ではなかった（p = .534）。そのため、棒グラフ上の差だけから、ジャンルによる明確な違いがあるとは結論できない。 続いて、利用者を4状態に分類し、ジャンルごとの構成を比較した。シミュレーションによるカイ二乗検定の結果、ジャンルと4状態の間に統計的に有意な関連は確認されなかった（χ² = 42.478、p = .4556）。以上から、今回の分析では、ジャンルによるユーザー状態の明確な違いは確認できなかった。\n各ゲームジャンルの利用者を、低プレイのみ、低課金のみ、低プレイ・低課金の両方、どちらも低くない、の4状態に分類し、ジャンルごとの割合を比較した。 「低プレイ・低課金の両方」の割合は、Sportsで最も高く10.0%、次いでSandboxが9.7%、MMORPGが9.6%であった。一方、Cardでは4.1%、MOBAとPuzzleでは4.6%であった。ただし、ジャンルとユーザー状態の関連を検定した結果、統計的に有意な関連は確認されなかった（χ² = 42.478、p = 0.4556）。 したがって、ジャンルによって状態の割合に差があるように見えるものの、今回の分析から、ゲームジャンルとユーザー状態に明確な関連があるとはいえない。\nジャンルと4状態の検定は、期待度数が小さいカテゴリの影響を考慮し、モンテカルロ法でp値を求めた。\n\n\nコード\nset.seed(20261013)\nchisq.test(genre_state, simulate.p.value = TRUE, B = 10000)\n\n\n\n    Pearson's Chi-squared test with simulated p-value (based on 10000\n    replicates)\n\ndata:  genre_state\nX-squared = 42.478, df = NA, p-value = 0.4556\n\n\nシミュレーションによるカイ二乗検定の結果、ジャンルとユーザー状態の間に統計的に有意な関連は確認されなかった（χ² = 42.478、p = .4556）。したがって、今回の分析では、ゲームジャンルによるユーザー状態の明確な違いは確認できなかった。",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>結果と考察</span>"
     ]
   },
   {
-    "objectID": "04_結果と考察.html#誤差分析",
-    "href": "04_結果と考察.html#誤差分析",
+    "objectID": "04_結果と考察.html#状態別の年齢分布",
+    "href": "04_結果と考察.html#状態別の年齢分布",
     "title": "4  結果と考察",
-    "section": "4.4 誤差分析",
-    "text": "4.4 誤差分析\n\n\n\n\n\n\n\n\n図 4.2: 予測誤差の分布\n\n\n\n\n\n図 4.2 より、回帰木の誤差分布は線形回帰と比べて中心（誤差ゼロ付近）に集中しており、予測のばらつきが小さいことが確認できる。",
+    "section": "4.3 4状態別の年齢分布",
+    "text": "4.3 4状態別の年齢分布\n\n\nコード\nage_data &lt;- d[!is.na(d$Age), ]\naggregate(Age ~ state, data = age_data, FUN = median)\n\n\n\n  \n\n\n\nコード\nkruskal.test(Age ~ state, data = age_data)\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Age by state\nKruskal-Wallis chi-squared = 1.9374, df = 3, p-value = 0.5855\n\n\n年齢が得られた利用者を対象に、4状態間で年齢分布を比較した。各状態の年齢中央値は、「低プレイのみ」が32歳、「低課金のみ」が34歳、「低プレイ・低課金の両方」が34歳、「どちらも低くない」が33歳であった。 Kruskal–Wallis検定の結果、4状態間に統計的に有意な差は確認されなかった（χ²(3) = 1.9374、p = .5855）。したがって、今回の分析では、ユーザー状態によって年齢分布が明確に異なるとはいえない。",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>結果と考察</span>"
     ]
   },
   {
-    "objectID": "04_結果と考察.html#変数重要度",
-    "href": "04_結果と考察.html#変数重要度",
+    "objectID": "04_結果と考察.html#閾値の感度分析",
+    "href": "04_結果と考察.html#閾値の感度分析",
     "title": "4  結果と考察",
-    "section": "4.5 変数重要度",
-    "text": "4.5 変数重要度\n\n\n\n\n\n\n\n\n図 4.3: 回帰木の変数重要度\n\n\n\n\n\n図 4.3 より、hour（時間帯）と temperature（気温）が予測への寄与度が最も高い変数であることがわかる。",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>結果と考察</span>"
-    ]
-  },
-  {
-    "objectID": "04_結果と考察.html#曜日別精度",
-    "href": "04_結果と考察.html#曜日別精度",
-    "title": "4  結果と考察",
-    "section": "4.6 曜日別精度",
-    "text": "4.6 曜日別精度\n\nMAERMSE\n\n\n\n\n\n\n\n\n\n\n図 4.4: 曜日別 MAE（回帰木）\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n図 4.5: 曜日別 RMSE（回帰木）",
+    "section": "4.4 閾値の感度分析",
+    "text": "4.4 閾値の感度分析\n低プレイ・低課金の判定基準を下位20%、25%、30%に変えて、両方に該当する利用者の人数と割合を比較した。\n\n\nコード\nsensitivity &lt;- do.call(rbind, lapply(c(.20, .25, .30), function(p) {\n  cs &lt;- unname(quantile(d$SessionCount, p, type = 7))\n  ca &lt;- unname(quantile(d$InAppPurchaseAmount, p, type = 7))\n  both &lt;- d$SessionCount &lt;= cs & d$InAppPurchaseAmount &lt;= ca\n  data.frame(\n    分位点_percent = 100 * p,\n    プレイ境界 = cs,\n    課金境界 = ca,\n    両方低い人数 = sum(both),\n    両方低い割合_percent = 100 * mean(both)\n  )\n}))\nsensitivity\n\n\n\n  \n\n\n\n判定基準を下位20%から30%へ広げると、低プレイ・低課金の両方に該当する利用者は112人（3.88%）から276人（9.56%）へ増加した。このことから、該当者数と割合は判定基準の設定によって変化する。 したがって、下位25%を用いた場合の7.51%は、その基準に基づく結果として解釈する必要がある。\n//「このデータには低プレイ・低課金の人が必ず7.51%いる」と決まっているわけではありません。「プレイ回数と課金額の下位25%を低いと定義した場合、両方に該当する人は7.51%だった」という意味です。論文では、どの基準を使った割合なのかを明記すれば、結果を正確に伝えられます。",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>結果と考察</span>"
     ]
@@ -313,8 +313,8 @@
     "objectID": "04_結果と考察.html#考察",
     "href": "04_結果と考察.html#考察",
     "title": "4  結果と考察",
-    "section": "4.7 考察",
-    "text": "4.7 考察\n本章の分析結果から、以下の考察が得られる。\n\nモデル性能について\n回帰木は線形回帰と比較して全ての評価指標で優れた性能を示した（表 4.1）。これは、シェアサイクルの利用パターンが時間帯や気象条件と非線形な関係を持つためと考えられる。例えば、通勤時間帯（7-9時、17-19時）に利用数が集中するパターンは、線形モデルでは捉えにくい。\n\n\n影響要因について\n変数重要度分析（図 4.3）から、以下の知見が得られた。\n\n時間帯（hour） が最も重要な変数であり、シェアサイクルの利用は通勤・通学の移動パターンに強く依存している\n気温（temperature） が2番目に重要であり、気象条件がシェアサイクルの利用判断に大きく影響する。先行研究 (Eren と Uz 2020年) の知見とも一致する\n降雨（is_rain） は利用数を大きく減少させる要因であり、需要予測において重要な変数である\n\n\nEren, Emir, と Volkan Emre Uz. 2020年. 「A Review on Bike-Sharing: The Factors Affecting Bike-Sharing Demand」. Sustainable Cities and Society 54: 101882. https://doi.org/10.1016/j.scs.2019.101882.\n\n\n先行研究との比較\nFanaee-T と Gama (2014年) が示したバイクシェアリングデータにおけるイベント検出の知見と同様に、気象条件と時間帯が利用パターンの主要な決定要因であることが確認された。また、Singhvi ほか (2015年) が報告した NYC Citi Bike の予測事例と比較しても、非線形手法の有効性は同様の傾向を示している。\n\n\n\nFanaee-T, Hadi, と João Gama. 2014年. 「Event Labeling Combining Ensemble Detectors and Background Knowledge」. Progress in Artificial Intelligence 2 (2–3): 113–27. https://doi.org/10.1007/s13748-013-0040-3.\n\nSinghvi, Divya, Somya Singhvi, Peter I. Frazier, ほか. 2015年. 「Predicting Bike-Share Usage in Practice: NYC Citi Bike Case Study」. INFORMS Transportation Science and Logistics Society Workshop.",
+    "section": "4.5 考察",
+    "text": "4.5 考察\n本研究では、利用者を「低プレイのみ」「低課金のみ」「両方」「どちらも低くない」の4状態に分類した。「低プレイのみ」は693人（24.00%）、「低課金のみ」は505人（17.49%）、「両方」は217人（7.51%）であり、プレイ回数の少なさと課金額の少なさは一部重なるものの、同じ利用者層とは限らないことが示された。\nロジスティック回帰分析では、年齢・国・端末・ジャンルとの明確な関連は確認されなかった。4状態についても、ジャンルとの関連（χ² = 42.478、p = .4556）や年齢分布の差（χ²(3) = 1.9374、p = .5855）は確認されなかった。ただし、これは関連が存在しないことの証明ではない。\n感度分析では、両方に該当する割合は判定基準によって3.88～9.56%に変化した。また、本データには実際の離脱やサービス終了の記録がないため、低プレイ・低課金状態をサービス終了リスクとして解釈することはできない。今後は、観測期間が明確な利用ログや離脱記録を用いて、利用者の行動状態と継続・離脱との関係を検討する必要がある。",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>結果と考察</span>"
     ]
@@ -324,17 +324,17 @@
     "href": "05_まとめ.html",
     "title": "5  まとめ",
     "section": "",
-    "text": "5.1 研究成果の要約\n本研究では、東京都内のシェアサイクル利用数を予測するモデルの構築を行い、以下の成果を得た。",
+    "text": "5.1 研究成果\n本研究では、プレイ回数とアプリ内課金額から低プレイ・低課金状態を定義し、属性・ジャンルとの関係とユーザー構成を段階的に分析した。二値指標による分析では、年齢・国・端末・ゲームジャンルと該当状態との明確な関連は確認されなかった。続いてユーザーを4状態に分けたところ、プレイ回数だけが低い人、課金額だけが低い人、両方が低い人、どちらも低くない人に分類できた。 4状態分析の対象は2,888人で、低プレイ・低課金の両方に該当する人は217人（7.51%）だった。ジャンルとの関連（モンテカルロp = .449）および年齢分布の群間差（Kruskal–Wallis p = .586）は、統計的に明確とはいえなかった。閾値を下位20%、25%、30%と変えると、両方が低い割合は3.88%、7.51%、9.56%となり、分類結果が境界設定に左右されることも確認された。",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>まとめ</span>"
     ]
   },
   {
-    "objectID": "05_まとめ.html#研究成果の要約",
-    "href": "05_まとめ.html#研究成果の要約",
+    "objectID": "05_まとめ.html#結論",
+    "href": "05_まとめ.html#結論",
     "title": "5  まとめ",
-    "section": "",
-    "text": "データの特性把握： シェアサイクルの利用数は気温・降雨・曜日・時間帯によって大きく変動することを確認した。特に気温との正の相関と、降雨時の利用数減少が顕著であった。\n予測モデルの構築と比較： 線形回帰と回帰木（rpart）の2手法でモデルを構築し、回帰木が全ての評価指標で優れた精度を示した。回帰木のRMSEは線形回帰と比較して改善が得られた。\n影響要因の特定： 変数重要度分析により、時間帯（hour）と気温（temperature）が利用数の予測に最も寄与する変数であることを明らかにした。",
+    "section": "5.2 結論",
+    "text": "5.2 結論\nプレイ回数と課金額を一つの二値指標にまとめるだけでは、それぞれの低さが異なるユーザーを区別できない。4状態に分けることで、ユーザー構成をより具体的に記述できた。一方、このデータと分析では、年齢・国・端末・ジャンルが低プレイ・低課金状態を明確に説明するという証拠は確認できなかった。したがって、結論は「4状態による分類で構成を把握できたが、属性やジャンルによる明確な差は示されなかった」とまとめられる。",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>まとめ</span>"
     ]
@@ -343,8 +343,8 @@
     "objectID": "05_まとめ.html#研究の限界",
     "href": "05_まとめ.html#研究の限界",
     "title": "5  まとめ",
-    "section": "5.2 研究の限界",
-    "text": "5.2 研究の限界\n本研究には以下の限界がある。\n\n合成データの使用： 本テンプレートでは分析手法の実演を目的として合成データを使用している。実際の研究では、自治体やサービス事業者が公開する実データを用いる必要がある。\n空間的要因の未考慮： ステーションの立地（駅からの距離、オフィス街かどうか等）を変数に含めていない。\nモデルの単純さ： 回帰木の剪定パラメータのチューニングを最小限に留めており、ランダムフォレストや勾配ブースティング等のアンサンブル手法で精度向上の余地がある。",
+    "section": "5.3 研究の限界",
+    "text": "5.3 研究の限界\n\n実際の離脱やサービス終了を測定していない。 退会日、最終ログイン、継続期間、ゲームタイトルごとの終了実績がなく、低プレイ・低課金状態は行動指標から作った代理分類である。\n横断データである。 行動の時間変化を追えないため、プレイ回数や課金額の変化、原因と結果を識別できない。\n閾値に依存する。 下位20・25・30%の定義で該当割合が変わる。特に離散的なプレイ回数では、境界値と同じ値のユーザーを含めることで指定分位点と実際の割合がずれる。\n分析ごとに対象者が異なる。 二値指標の作成、回帰分析、4状態分析で必要な変数が違うため、標本数と境界値を区別して報告する必要がある。",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>まとめ</span>"
     ]
@@ -353,18 +353,18 @@
     "objectID": "05_まとめ.html#今後の課題",
     "href": "05_まとめ.html#今後の課題",
     "title": "5  まとめ",
-    "section": "5.3 今後の課題",
-    "text": "5.3 今後の課題\n\n実データ（自治体オープンデータ等）を用いた分析の実施\nステーション別の利用予測モデルの構築\nランダムフォレストや勾配ブースティング等の高度な手法との比較\nリアルタイム予測システムのプロトタイプ開発\n需要予測に基づく最適な自転車再配置アルゴリズムの検討",
+    "section": "5.4 今後の課題",
+    "text": "5.4 今後の課題\n実際のユーザー離脱を調べるには、ユーザーIDに加えてログイン日時、セッション履歴、継続期間、退会・離脱ラベルを含む縦断データが必要である。ゲームのサービス終了との関係を検討する場合には、ゲームタイトル単位の利用者推移・売上・運営状況・終了実績を結び付けたデータが必要となる。こうしたデータが得られた段階で、本研究の低プレイ・低課金分類が実際の離脱やサービス終了とどの程度対応するかを検証できる。",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>まとめ</span>"
     ]
   },
   {
-    "objectID": "05_まとめ.html#謝辞",
-    "href": "05_まとめ.html#謝辞",
+    "objectID": "05_まとめ.html#発表時の要点",
+    "href": "05_まとめ.html#発表時の要点",
     "title": "5  まとめ",
-    "section": "5.4 謝辞",
-    "text": "5.4 謝辞\n本研究を進めるにあたり、丁寧なご指導をいただいた竹田恒先生に深く感謝いたします。また、データサイエンスコースの同期の皆さんとの議論は、研究の方向性を考える上で大変参考になりました。",
+    "section": "5.5 発表時の要点",
+    "text": "5.5 発表時の要点\n\nプレイ回数と課金額を用いた二値指標から分析を始め、年齢・国・端末・ジャンルとの関連を検討した。\n二値分類だけでは異なる行動状態を区別しにくいため、4状態に分けてユーザー構成を記述した。\n属性・ジャンルとの明確な関連は確認されず、閾値を変えると該当割合は変化した。\n合成データに実際の離脱・サービス終了記録は含まれないため、結果をサービス終了リスクの推定として説明しない。",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>まとめ</span>"
     ]
