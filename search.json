@@ -80,26 +80,6 @@
     ]
   },
   {
-    "objectID": "01_研究概要.html#分析上の位置づけ",
-    "href": "01_研究概要.html#分析上の位置づけ",
-    "title": "1  研究概要",
-    "section": "1.6 分析上の位置づけ",
-    "text": "1.6 分析上の位置づけ\nプレイ回数と課金額から作る二値指標および4状態は、ユーザー行動を分類するための操作的な指標である。データに実際のサービス終了やユーザー離脱のラベルはなく、SessionCount の観測期間も明らかでないため、サービス終了確率・離脱確率・週あたりのプレイ回数としては解釈しない。横断的な合成データであることから、結果は記述的な構成または統計的関連として報告し、因果関係や市場全体への一般化を主張しない。",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
-    ]
-  },
-  {
-    "objectID": "01_研究概要.html#研究体制",
-    "href": "01_研究概要.html#研究体制",
-    "title": "1  研究概要",
-    "section": "1.7 研究体制",
-    "text": "1.7 研究体制\nKaggleで公開された mobile_game_inapp_purchases.csv をRStudioで分析する。二値指標による分類から属性・ジャンルとの関係を調べ、さらに4状態の内訳へと進む一続きの研究として構成する。分析ごとに異なる標本の定義を明示し、データの性質、配布元の説明、ライセンスは第2章に示す。",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>研究概要</span>"
-    ]
-  },
-  {
     "objectID": "02_データ.html",
     "href": "02_データ.html",
     "title": "2  データ",
