@@ -5421,7 +5421,6 @@ window.onload = function() {
   <li><a href="#状態の定義" id="toc-状態の定義" class="nav-link" data-scroll-target="#状態の定義"><span class="header-section-number">3.7</span> 4状態の定義</a></li>
   <li><a href="#年齢差の補助分析" id="toc-年齢差の補助分析" class="nav-link" data-scroll-target="#年齢差の補助分析"><span class="header-section-number">3.8</span> 年齢差の補助分析</a></li>
   <li><a href="#閾値の感度分析" id="toc-閾値の感度分析" class="nav-link" data-scroll-target="#閾値の感度分析"><span class="header-section-number">3.9</span> 閾値の感度分析</a></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">3.10</span> まとめ</a></li>
   </ul>
 </nav>
     </div>
@@ -6179,51 +6178,8 @@ Kruskal-Wallis chi-squared = 1.9374, df = 3, p-value = 0.5855</code></pre>
 </div>
 <p>低プレイ・低課金の判定基準による結果の変化を確認するため、下位20%、25%、30%を基準とした感度分析を行った。<br>
 その結果、両方に該当するユーザーは、下位20%基準で112人（3.88%）、25%基準で217人（7.51%）、30%基準で276人（9.56%）であった。判定基準を広げると該当者の割合も増加したため、該当者数や割合は、低プレイ・低課金とする境界の設定に左右される。したがって、7.51%という割合は、下位25%を基準とした場合の結果として解釈する必要がある。</p>
-</section>
-<section id="まとめ" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">3.10</span> まとめ</h2>
-<section id="分析手法" class="level3">
-<h3 class="anchored" data-anchor-id="分析手法">分析手法</h3>
-<ul>
-<li><p><strong>分析対象の設定</strong></p>
-<ul>
-<li><p>各分析に必要な変数がそろっている利用者を対象とした。</p></li>
-<li><p>必要な変数が分析ごとに異なるため、分析によって対象者数は異なる。</p></li>
-</ul></li>
-<li><p><strong>低プレイ・低課金の基準設定</strong></p>
-<ul>
-<li><p>プレイ回数とアプリ内課金額の第1四分位数を、それぞれの判定基準とした。</p></li>
-<li><p>各基準以下の利用者を「低プレイ」「低課金」と判定した。</p></li>
-</ul></li>
-<li><p><strong>変数の分布と該当割合の確認</strong></p>
-<ul>
-<li><p>プレイ回数と課金額の要約統計量や分布を確認した。</p></li>
-<li><p>低プレイと低課金の両方に該当する利用者の人数と割合を算出した。</p></li>
-</ul></li>
-<li><p><strong>属性との関連分析</strong></p>
-<ul>
-<li><p>年齢・国・端末・ゲームジャンルと、低プレイ・低課金の代理指標との関連をロジスティック回帰分析で検討した。</p></li>
-<li><p>国・端末・ゲームジャンルについては、尤度比検定を用いて変数全体としての関連も評価した。</p></li>
-</ul></li>
-<li><p><strong>4状態の分類と比較</strong></p>
-<ul>
-<li><p>利用者を「低プレイのみ」「低課金のみ」「低プレイ・低課金の両方」「どちらも低くない」の4状態に分類した。</p></li>
-<li><p>ゲームジャンルごとの状態構成をクロス集計し、シミュレーションによるカイ二乗検定で関連を検討した。</p></li>
-<li><p>Kruskal–Wallis検定を用いて、4状態間の年齢分布を比較した。</p></li>
-</ul></li>
-<li><p><strong>判定基準の感度分析</strong></p>
-<ul>
-<li>判定基準を下位20%、25%、30%に変え、低プレイ・低課金の両方に該当する人数と割合を比較した。</li>
-</ul></li>
-<li><p><strong>指標の解釈</strong></p>
-<ul>
-<li><p>低プレイ・低課金は利用者行動の代理指標として扱った。</p></li>
-<li><p>実際のゲーム離脱やサービス終了を直接測定する分析ではない。</p></li>
-</ul></li>
-</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
